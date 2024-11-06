@@ -22,9 +22,17 @@ app.use(express.static(path.join(__dirname, 'src')));
 router.get('/', (req,res) => 
     {
         console.log(`Request at ${req.originalUrl}`);
-        res.sendFile(path.join(`${__dirname}/src/index.html`));
+        res.sendFile(path.join(`${__dirname}/html/index.html`));
     }
 )
+
+router.get('/login', (req,res) => 
+    {
+        console.log(`Request at ${req.originalUrl}`);
+        res.sendFile(path.join(`${__dirname}/html/login.html`));
+    }
+)
+
 
 
 
