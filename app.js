@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 router.get('/', (req,res) => 
     {
         console.log(`Request at ${req.originalUrl}`);
-        res.sendFile(path.join(`${__dirname}/public/index.html`));
+        res.sendFile(path.join(`${__dirname}/public/home.html`));
     }
 )
 
