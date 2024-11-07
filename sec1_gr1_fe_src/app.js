@@ -39,6 +39,41 @@ router.get('/navbar', (req,res) =>
     }
 )
 
+router.get('/detail', (req,res) => 
+    {
+        console.log(`Request at ${req.originalUrl}`);
+        res.sendFile(path.join(`${__dirname}/public/detail.html`));
+    }
+)
+
+router.get('/productmanage', (req,res) => 
+    {
+        console.log(`Request at ${req.originalUrl}`);
+        res.sendFile(path.join(`${__dirname}/public/productmanage.html`));
+    }
+)
+
+router.get('/searchoutput', (req,res) => 
+    {
+        console.log(`Request at ${req.originalUrl}`);
+        res.sendFile(path.join(`${__dirname}/public/searchoutput.html`));
+    }
+)
+
+router.get('/teampage', (req,res) => 
+    {
+        console.log(`Request at ${req.originalUrl}`);
+        res.sendFile(path.join(`${__dirname}/public/teampage.html`));
+    }
+)
+
+router.get('/usermanage', (req,res) => 
+    {
+        console.log(`Request at ${req.originalUrl}`);
+        res.sendFile(path.join(`${__dirname}/public/usermanage.html`));
+    }
+)
+
 
 const port = process.env.port;
 app.listen(port, () => 
