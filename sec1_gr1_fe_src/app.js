@@ -20,23 +20,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // MySQL Creare Connection
-const connection = mysql.createConnection
-    (
-        {
-            host: process.env.DB_HOST,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASS,
-            database: process.env.DB_NAME
-        }
-    );
+// const connection = mysql.createConnection
+//     (
+//         {
+//             host: process.env.DB_HOST,
+//             user: process.env.DB_USER,
+//             password: process.env.DB_PASS,
+//             database: process.env.DB_NAME
+//         }
+//     );
 
-// Connet to MySQL Server
-connection.connect( err =>
-    {
-        if (err) throw err;
-        console.log('Connected to MySQL')
-    }
-)
+// // Connet to MySQL Server
+// connection.connect( err =>
+//     {
+//         if (err) throw err;
+//         console.log('Connected to MySQL')
+//     }
+// )
 
 
 
