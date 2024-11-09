@@ -1,0 +1,22 @@
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px; /* Make the scrollbar thin */
+    height: 8px; /* Make the scrollbar thin */
+   
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #1E1E1E; /* White color for the scrollbar thumb */
+    border-radius: 10px; /* Make the scrollbar thumb rounded */
+    
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent; /* Transparent background for the track */
+    
+}
+ /* Hover effect to expand scrollbar */
+.custom-scrollbar:hover::-webkit-scrollbar {
+    width: 8px; /* Expand the scrollbar width on hover */
+    height: 8px; /* Expand the scrollbar height on hover */
+}
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 255, 255); /* More opaque thumb on hover */
+}

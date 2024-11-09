@@ -18,6 +18,7 @@ router.use(express.urlencoded({ extended : true }));
 app.use(express.static(path.join(__dirname, 'src')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 router.get('/', (req,res) => 
     {
         console.log(`Request at ${req.originalUrl}`);
@@ -81,3 +82,4 @@ app.listen(port, () =>
         console.log(`Server listening on port: ${port}`);
     }
 )
+
