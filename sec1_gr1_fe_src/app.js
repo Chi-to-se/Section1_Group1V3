@@ -38,7 +38,31 @@ connection.connect( err =>
     }
 )
 
+// Test upload data to MySQL
+router.post('/upload', (req, res) => 
+    {
+        console.log(`Request at ${req.originalUrl}`);
+        let sql = `INSERT INTO PRODUCT 
+                    (P_Name, P_Img, P_Type, P_Brand, P_Source, P_Color, P_Price)
+                    VALUES (?,?,?,?,?,?,?)`
 
+        connection.query(sql, 
+            ['Blue Suit', '1111111', 'Suit', 'Ford', 'www.google.com', 'Blue', 5000],
+            (err, result) => 
+            {
+                if (err) throw err;
+                res.send('Insert succesfully')
+            }
+        )
+    }
+)
+
+router.get('/uploadtest', (req,res) => 
+    {
+        console.log(`Request at ${req.originalUrl}`);
+        res.sendFile(path.join(`${__dirname}/public/uploadtest.html`));
+    }
+)
 
 router.get('/', (req,res) => 
     {
