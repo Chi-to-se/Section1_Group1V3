@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const mysql = require('mysql2');
+const multer = require('multer');
+const fs = require('fs');
 
 const app = express();
 const router = express.Router();
@@ -9,6 +11,10 @@ const router = express.Router();
 app.use(router);
 app.use('/', router);
 dotenv.config();
+
+// Setup Multer 
+const storage = multer.memoryStorage();
+const upload = multer( { storage: storage });
 
 // For post method
 router.use(express.json());
@@ -39,15 +45,22 @@ connection.connect( err =>
 )
 
 // Test upload data to MySQL
-router.post('/upload', (req, res) => 
-    {
+router.post('/upload', upload.single('image'),(req, res) => 
+    {  
+        const imagetype = req.body.type;
+        const imagename = req.file.originalname;
+        const imagedata = req.file.buffer;
+        const imagebrand = req.body.brand;
+        const imagesource = req.body.source;
+        const imagecolor = req.body.color;
+        const imageprice = req.body.price;
         console.log(`Request at ${req.originalUrl}`);
         let sql = `INSERT INTO PRODUCT 
                     (P_Name, P_Img, P_Type, P_Brand, P_Source, P_Color, P_Price)
                     VALUES (?,?,?,?,?,?,?)`
 
         connection.query(sql, 
-            ['Blue Suit', '1111111', 'Suit', 'Ford', 'www.google.com', 'Blue', 5000],
+            [imagename, imagedata, imagetype, imagebrand, imagesource , imagecolor , imageprice],
             (err, result) => 
             {
                 if (err) throw err;

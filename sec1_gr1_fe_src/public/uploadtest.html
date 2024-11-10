@@ -8,7 +8,28 @@
 </head>
 <body>
     <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="name">Type:</label>
+        <select name="type">
+            <option value="" disabled selected>Select an option</option>
+            <option value="Suit"> Suit </option>
+            <option value="Tuxedo"> Tuxedo </option>
+        </select><br/>
+
+
+        <label for="brand">Brand:</label>
+        <input type="text" name="brand" required><br/>
+
+        <label for="source">Source:</label>
+        <input type="text" name="source" required><br/>
+
+        <label for="color">Color:</label>
+        <input type="text" name="color" required><br/>
+
+        <label for="price">Price:</label>
+        <input type="text" name="price" required><br/>
+
         <input type="file" name="image" required>
+        
         <button type="submit">Upload Image</button>
     </form>
 
