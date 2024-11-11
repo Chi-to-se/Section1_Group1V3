@@ -13,7 +13,7 @@
 
 
 <body class="max-h-screen flex items-center justify-center flex-wrap bg-[#1E1E1E]">
-    <div class="container-sm mx-auto -translate-x-10 -translate-y-10 border-2 border-pink-500 space-x-2 ">
+    <div class="container-sm mx-auto -translate-x-10 -translate-y-10 space-x-2 ">
         <!-- Title Section -->
         <h1 class="text-5xl font-serif space-y-2 text-white w-[350px]">
             <p>Suits That Slay</p>
@@ -23,7 +23,7 @@
     </div>
 
     <!-- Products Section -->
-    <div class="container mx-auto my-auto translate-x-20 whitespace-nowrap px-2 py-3 w-[1100px] border-2 border-sky-500  overflow-x-scroll scrollbar scrollbar-thumb-white custom-scrollbar snap-x">
+    <div class="container mx-auto my-auto translate-x-20 whitespace-nowrap px-2 py-3 w-[1100px] overflow-x-scroll scrollbar scrollbar-thumb-white custom-scrollbar snap-x">
         <div class="flex items-center gap-x-5 gap-y-5 ">
             <div class="text-center snap-center flex flex-col items-center min-w-[400px]">
                 <img src="images/WOMENS_TEXTURED_GRAY.png" alt="Women's Textured Gray Suit" class="object-cover w-[400px] h-[700px]  rounded-sm mb-2">
@@ -52,9 +52,17 @@
         </div>
     </div>
 
-    <div class="bg-slate-100 w-screen flex justify-center items-center mt-10">
-        <div class="container max-w-screen-xl">
-            <img src="images/pexels-mart-production-9566328.jpg" alt="Brilliant Blue Suit Vest" class="object-cover w-full border-2 border-red-500">
+    <div class="w-full max-w-full mx-auto mt-10">
+        <div class="relative">
+            <!-- Background image -->
+            <img src="images/pexels-mart-production-9566328.jpg" alt="Elegant Couple" class="object-cover w-full h-[80vh]">
+
+            <!-- Overlay text content -->
+            <div class="absolute inset-0 flex flex-col justify-center items-center text-center bg-black bg-opacity-50 text-white">
+                <h1 class="text-5xl font-bold">STYLE THAT SUITS YOU</h1>
+                <p class="text-lg mt-2">Yours to own, from your wedding day to everyday.</p>
+                <button class="mt-4 px-6 py-3 bg-white text-black font-semibold rounded-lg  hover:bg-black hover:duration-700 duration-700 hover:text-white">SHOP NOW</button>
+            </div>
         </div>
     </div>
 </body>
