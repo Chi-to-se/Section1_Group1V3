@@ -25,26 +25,28 @@ app.use(express.static(path.join(__dirname, 'src')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// MySQL Creare Connection
-// const connection = mysql.createConnection
-//     (
-//         {
-//             host: process.env.DB_HOST,
-//             user: process.env.DB_USER,
-//             password: process.env.DB_PASS,
-//             database: process.env.DB_NAME
-//         }
-//     );
+// MySQL Create Connection
+const connection = mysql.createConnection
+    (
+        {
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME
+        }
+    );
 
-// // Connet to MySQL Server
-// connection.connect( err =>
-//     {
-//         if (err) throw err;
-//         console.log('Connected to MySQL')
-//     }
-// )
+// Connet to MySQL Server
+connection.connect( err =>
+    {
+        if (err) throw err;
+        console.log('Connected to MySQL')
+    }
+)
 
 // Test upload data to MySQL
+
+
 router.post('/upload', upload.single('image'),(req, res) => 
     {  
         const imagetype = req.body.type;
@@ -112,6 +114,13 @@ router.get('/productmanage', (req,res) =>
     }
 )
 
+router.get('/search', (req,res) => 
+    {
+        console.log(`Request at ${req.originalUrl}`);
+        res.sendFile(path.join(`${__dirname}/public/search.html`));
+    }
+)
+
 router.get('/searchoutput', (req,res) => 
     {
         console.log(`Request at ${req.originalUrl}`);
@@ -130,6 +139,13 @@ router.get('/usermanage', (req,res) =>
     {
         console.log(`Request at ${req.originalUrl}`);
         res.sendFile(path.join(`${__dirname}/public/usermanage.html`));
+    }
+)
+
+router.get('/footer', (req,res) => 
+    {
+        console.log(`Request at ${req.originalUrl}`);
+        res.sendFile(path.join(`${__dirname}/public/footer.html`));
     }
 )
 
