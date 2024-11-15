@@ -93,12 +93,7 @@ router.get('/login', (req,res) =>
     }
 )
 
-router.get('/navbar', (req,res) => 
-    {
-        console.log(`Request at ${req.originalUrl}`);
-        res.sendFile(path.join(`${__dirname}/public/navbar.html`));
-    }
-)
+
 
 router.get('/detail', (req,res) => 
     {
@@ -142,12 +137,7 @@ router.get('/usermanage', (req,res) =>
     }
 )
 
-router.get('/footer', (req,res) => 
-    {
-        console.log(`Request at ${req.originalUrl}`);
-        res.sendFile(path.join(`${__dirname}/public/footer.html`));
-    }
-)
+
 
 
 const port = process.env.port;
