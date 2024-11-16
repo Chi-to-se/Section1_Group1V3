@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,63 @@
     <link rel="stylesheet" href="\output.css">
     <script src="/scripts/script.js"></script>
 </head>
+
 <body>
-    <nav id="navbar"></nav>
-    <div>
-        <h1 class=" underline bg-red-600"> detail </h1>
+    <div class="flex justify-center items-center min-h-screen bg-[#f9f9f9] ">
+    <div class="flex flex-col md:flex-row items-center p-8 ">
+        <div class="flex flex-row gap-4 p-4 drop-shadow-md mb-4 md:mb-0">
+            <img src="images/WOMENS_TEXTURED_GRAY_Search.webp" alt="Women's Textured Gray Suit" class="object-cover w-[400px] h-[700px] mb-2 rounded-sm">
+            <img src="images/WOMENS_TEXTURED_GRAY.png" alt="Women's Textured Gray Suit_2" class="object-cover w-[400px] h-[700px] mb-2 rounded-sm">
+        </div>
+        <div class="md:ml-8 max-w-md">
+            <div class="text-sm text-gray-400 mb-2">Product ID: 1001</div>
+            <h1 class="text-3xl font-semibold mb-2">Women's Textured Gray Suit Jacket</h1>
+            <div class="text-gray-500 text-sm mb-4">Brand: SuitShop</div>
+            <div class="text-2xl font-semibold mb-4">$129.00</div>
+
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <span class="text-gray-400 mr-2">Size</span>
+                    <div class="inline-flex space-x-2">
+                        <button class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white" data-active="false">S</button>
+                        <button class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white" data-active="false">M</button>
+                        <button class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white" data-active="false">L</button>
+                        <button class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white" data-active="false">XL</button>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-gray-400 mr-2">Colour:</span>
+                    <div class="w-7 h-7 bg-gray-300 rounded-full"></div>
+                </div>
+            </div>
+
+            <button
+                class="w-full bg-black hover:bg-[#3d3d3d] text-white font-semibold py-2 rounded mb-4 flex items-center justify-center space-x-2 drop-shadow-md">
+                <img src="images/shopping_cart.svg" alt="ไอคอนตะกร้า" class="h-6 w-6 " />
+                <span>Add to Cart</span>
+            </button>
+
+            <div class="flex justify-between text-sm text-gray-600">
+                <span>Available: 3 pcs</span>
+                <a href="#" class="underline hover:text-gray-400">Link and Reference</a>
+            </div>
+        </div>
     </div>
-    <footer id="footer"></footer>>
+    </div>
+    <script>
+        // กดเลือก Size จะเปลี่ยนสีเป็นสีดำ
+        const sizeButtons = document.querySelectorAll('.size-button');
+        
+        sizeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Reset data-active on all buttons
+                sizeButtons.forEach(btn => btn.setAttribute('data-active', 'false'));
+                // Set data-active on the clicked button
+                button.setAttribute('data-active', 'true');
+            });
+        });
+    </script>
 </body>
+
+
 </html>
