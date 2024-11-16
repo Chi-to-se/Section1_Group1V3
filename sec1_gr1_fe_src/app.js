@@ -44,34 +44,74 @@ connection.connect( err =>
     }
 )
 
-// Test upload data to MySQL
+// Test upload/search data to MySQL
+router.post('/search', upload.single('image'), (req, res) => {
+    const productID = req.body.id;
+    const productType = req.body.type;
+    const productBrand = req.body.brand;
+    const productName = req.body.name;
+    const productColor = req.body.color;
 
+    console.log(`Request at ${req.originalUrl}`);
 
-router.post('/upload', upload.single('image'),(req, res) => 
-    {  
-        const imagetype = req.body.type;
-        const imagename = req.file.originalname;
-        const imagedata = req.file.buffer;
-        const imagebrand = req.body.brand;
-        const imagesource = req.body.source;
-        const imagecolor = req.body.color;
-        const imageprice = req.body.price;
-        console.log(`Request at ${req.originalUrl}`);
-        let sql = `INSERT INTO PRODUCT 
-                    (P_Name, P_Img, P_Type, P_Brand, P_Source, P_Color, P_Price)
-                    VALUES (?,?,?,?,?,?,?)`
+    // Start with a base SQL query
+    let sql = `SELECT P_ID,P_Name,P_Type,P_Brand,P_Source,P_Color,P_Price FROM PRODUCT WHERE 1=1`;
+    const params = [];
 
-        connection.query(sql, 
-            [imagename, imagedata, imagetype, imagebrand, imagesource , imagecolor , imageprice],
-            (err, result) => 
-            {
-                if (err) throw err;
-                res.send('Insert succesfully')
-            }
-        )
+    // Dynamically add conditions based on provided values
+    if (productID) {
+        sql += ` AND P_ID = ?`;
+        params.push(productID);
     }
-)
+    if (productType) {
+        sql += ` AND P_Type = ?`;
+        params.push(productType);
+    }
+    if (productBrand) {
+        sql += ` AND P_Brand = ?`;
+        params.push(productBrand);
+    }
+    if (productName) {
+        sql += ` AND P_Name = ?`;
+        params.push(productName);
+    }
+    if (productColor) {
+        sql += ` AND P_Color = ?`;
+        params.push(productColor);
+    }
 
+    // Execute the query
+    connection.query(sql, params, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+
+// router.post('/upload', upload.single('image'),(req, res) => 
+//     {  
+//         const imagetype = req.body.type;
+//         const imagename = req.file.originalname;
+//         const imagedata = req.file.buffer;
+//         const imagebrand = req.body.brand;
+//         const imagesource = req.body.source;
+//         const imagecolor = req.body.color;
+//         const imageprice = req.body.price;
+//         console.log(`Request at ${req.originalUrl}`);
+//         let sql = `INSERT INTO PRODUCT 
+//                     (P_Name, P_Img, P_Type, P_Brand, P_Source, P_Color, P_Price)
+//                     VALUES (?,?,?,?,?,?,?)`
+
+//         connection.query(sql, 
+//             [imagename, imagedata, imagetype, imagebrand, imagesource , imagecolor , imageprice],
+//             (err, result) => 
+//             {
+//                 if (err) throw err;
+//                 res.send('Insert succesfully')
+//             }
+//         )
+//     }
+// )
 
 // Test download from MySQL
 router.get('/image/:id', (req, res) => {
