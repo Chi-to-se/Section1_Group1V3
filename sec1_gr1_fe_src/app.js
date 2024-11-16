@@ -116,7 +116,6 @@ router.get('/productedit', (req,res) =>
     }
 )
 
-
 router.get('/search', (req,res) => 
     {
         console.log(`Request at ${req.originalUrl}`);
@@ -145,6 +144,12 @@ router.get('/usermanage', (req,res) =>
     }
 )
 
+router.get('/useredit', (req,res) => 
+    {
+        console.log(`Request at ${req.originalUrl}`);
+        res.sendFile(path.join(`${__dirname}/public/useredit.html`));
+    }
+)
 
 
 
