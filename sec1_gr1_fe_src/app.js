@@ -72,6 +72,55 @@ router.post('/upload', upload.single('image'),(req, res) =>
     }
 )
 
+
+// Test download from MySQL
+router.get('/image/:id', (req, res) => {
+    const imageId = req.params.id;
+    console.log(imageId);
+    const query = 'SELECT P_Name, P_Img FROM PRODUCT WHERE P_ID = ?';
+
+    connection.query(query, [imageId], (err, results) => {
+        if (err) {
+            console.error("Error fetching image:", err);
+            return res.status(500).send('Server error');
+        }
+        if (results.length === 0) {
+            return res.status(404).send('Image not found');
+        }
+        
+        const { P_Name, P_Img } = results[0];
+        console.log("Image record:", { P_Name, P_Img });
+        
+        // Find type of image/Detect the MIME type based on the file extension
+        const fileExtension = path.extname(P_Name).toLowerCase();
+        let mimeType;
+
+        switch (fileExtension) {
+            case '.jpg':
+            case '.jpeg':
+                mimeType = 'image/jpeg';
+                break;
+            case '.png':
+                mimeType = 'image/png';
+                break;
+            case '.gif':
+                mimeType = 'image/gif';
+                break;
+            default:
+                mimeType = 'application/octet-stream';  // Fallback for unknown types
+        }
+
+        console.log('Image data length:', P_Img.length);
+        console.log('File extension:', fileExtension);
+        console.log('Mime type:', mimeType);
+
+        // Set MIME type and send image data
+        res.set('Content-Type', mimeType);
+        res.send(P_Img);  // Send the image data
+    });
+});
+
+
 router.get('/uploadtest', (req,res) => 
     {
         console.log(`Request at ${req.originalUrl}`);
