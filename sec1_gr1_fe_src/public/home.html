@@ -9,62 +9,68 @@
     <link rel="stylesheet" href="\output.css">
     <script src="https://cdn.jsdelivr.net/npm/tailwind-scrollbar@3.1.0/src/index.min.js"></script>
     <link rel="stylesheet" href="\global.css">
+    <script src="/scripts/script.js"></script>
 </head>
 
+<body>
+    <nav id="navbar"></nav>
 
-<body class="max-h-screen flex items-center justify-center flex-wrap bg-[#1E1E1E]">
-    <div class="container-sm mx-auto -translate-x-10 -translate-y-10 space-x-2 ">
-        <!-- Title Section -->
-        <h1 class="text-5xl font-serif space-y-2 text-white w-[350px]">
-            <p>Suits That Slay</p>
-            <p>Every angle</p>
-            <p class="text-base font-mono space-y-16">Suits that tell your story.</p>
-        </h1>
-    </div>
-
-    <!-- Products Section -->
-    <div class="container mx-auto my-auto translate-x-20 whitespace-nowrap px-2 py-3 w-[1100px] overflow-x-scroll scrollbar scrollbar-thumb-white custom-scrollbar snap-x">
-        <div class="flex items-center gap-x-5 gap-y-5 ">
-            <div class="text-center snap-center flex flex-col items-center min-w-[400px]">
-                <img src="images/WOMENS_TEXTURED_GRAY.png" alt="Women's Textured Gray Suit" class="object-cover w-[400px] h-[700px]  rounded-sm mb-2">
-                <p class="text-lg font-mono space-y-16 text-white max-w-xs whitespace-nowrap overflow-hidden text-ellipsis">Women's Textured Gray Suit $129</p>
-            </div>
-
-            <div class="text-center snap-center flex flex-col items-center min-w-[400px]">
-                <img src="images/BRILLIANT_BLUE_SUIT_VEST.png" alt="Brilliant Blue Suit Vest" class="object-cover w-[400px] h-[700px]  rounded-sm mb-2">
-                <p class="text-lg font-mono space-y-16 text-white max-w-xs whitespace-nowrap overflow-hidden text-ellipsis">Brilliant Blue Suit Vest $49</p>
-            </div>
-
-            <div class="text-center snap-center flex flex-col items-center min-w-[400px]">
-                <img src="images/Women's Champagne Double Breasted Suit Jacket.png" alt="Women's Champagne Double Breasted Suit Jacket" class="object-cover w-[400px] h-[700px]  rounded-sm mb-2">
-                <p class="text-lg font-mono space-y-16 text-white max-w-xs whitespace-nowrap overflow-hidden text-ellipsis">Women's Champagne Double Breasted $229</p>
-            </div>
-
-            <div class="text-center snap-center flex flex-col items-center min-w-[400px]">
-                <img src="images/Women's Black Tuxedo Jacket.webp" alt="Women's Black Tuxedo Jacket" class="object-cover w-[400px] h-[700px]  rounded-sm mb-2">
-                <p class="text-lg font-mono space-y-16 text-white max-w-xs whitespace-nowrap overflow-hidden text-ellipsis">Women's Black Tuxedo Jacket $149</p>
-            </div>
-
-            <div class="text-center snap-center flex flex-col items-center min-w-[400px]">
-                <img src="images/Men's Teal Suit.webp" alt="Men's Teal Suit" class="w-[400px] h-[700px] object-cover rounded-sm mb-2">
-                <p class="text-lg font-mono space-y-16 text-white max-w-xs whitespace-nowrap overflow-hidden text-ellipsis">Men's Teal Suit $149</p>
-            </div> 
+    <div class=" flex items-center justify-center flex-wrap bg-[#1E1E1E]">
+        <div class="container-sm mx-auto -translate-x-10 -translate-y-10 space-x-2 ">
+            <!-- Title Section -->
+            <h1 class="text-5xl font-serif space-y-2 text-white w-[350px]">
+                <p>Suits That Slay</p>
+                <p>Every angle</p>
+                <p class="text-base font-mono space-y-16">Suits that tell your story.</p>
+            </h1>
         </div>
-    </div>
 
-    <div class="w-full max-w-full mx-auto mt-10">
-        <div class="relative">
-            <!-- Background image -->
-            <img src="images/pexels-mart-production-9566328.jpg" alt="Elegant Couple" class="object-cover w-full h-[80vh]">
+        <!-- Products Section -->
+        <div class="container mx-auto my-auto translate-x-20 whitespace-nowrap px-2 py-3 w-[1100px] overflow-x-scroll scrollbar scrollbar-thumb-white custom-scrollbar snap-x">
+            <div class="flex items-center gap-x-5 gap-y-5 ">
+                <div class="text-center snap-center flex flex-col items-center min-w-[400px]">
+                    <img src="images/WOMENS_TEXTURED_GRAY.png" alt="Women's Textured Gray Suit" class="object-cover w-[400px] h-[700px]  rounded-sm mb-2">
+                    <p class="text-lg font-mono space-y-16 text-white max-w-xs whitespace-nowrap overflow-hidden text-ellipsis">Women's Textured Gray Suit $129</p>
+                </div>
 
-            <!-- Overlay text content -->
-            <div class="absolute inset-0 flex flex-col justify-center items-center text-center bg-black bg-opacity-50 text-white">
-                <h1 class="text-5xl font-bold">STYLE THAT SUITS YOU</h1>
-                <p class="text-lg mt-2">Yours to own, from your wedding day to everyday.</p>
-                <button class="mt-4 px-6 py-3 bg-white text-black font-semibold rounded-lg  hover:bg-black hover:duration-700 duration-700 hover:text-white">SHOP NOW</button>
+                <div class="text-center snap-center flex flex-col items-center min-w-[400px]">
+                    <img src="images/BRILLIANT_BLUE_SUIT_VEST.png" alt="Brilliant Blue Suit Vest" class="object-cover w-[400px] h-[700px]  rounded-sm mb-2">
+                    <p class="text-lg font-mono space-y-16 text-white max-w-xs whitespace-nowrap overflow-hidden text-ellipsis">Brilliant Blue Suit Vest $49</p>
+                </div>
+
+                <div class="text-center snap-center flex flex-col items-center min-w-[400px]">
+                    <img src="images/Women's Champagne Double Breasted Suit Jacket.png" alt="Women's Champagne Double Breasted Suit Jacket" class="object-cover w-[400px] h-[700px]  rounded-sm mb-2">
+                    <p class="text-lg font-mono space-y-16 text-white max-w-xs whitespace-nowrap overflow-hidden text-ellipsis">Women's Champagne Double Breasted $229</p>
+                </div>
+
+                <div class="text-center snap-center flex flex-col items-center min-w-[400px]">
+                    <img src="images/Women's Black Tuxedo Jacket.webp" alt="Women's Black Tuxedo Jacket" class="object-cover w-[400px] h-[700px]  rounded-sm mb-2">
+                    <p class="text-lg font-mono space-y-16 text-white max-w-xs whitespace-nowrap overflow-hidden text-ellipsis">Women's Black Tuxedo Jacket $149</p>
+                </div>
+
+                <div class="text-center snap-center flex flex-col items-center min-w-[400px]">
+                    <img src="images/Men's Teal Suit.webp" alt="Men's Teal Suit" class="w-[400px] h-[700px] object-cover rounded-sm mb-2">
+                    <p class="text-lg font-mono space-y-16 text-white max-w-xs whitespace-nowrap overflow-hidden text-ellipsis">Men's Teal Suit $224</p>
+                </div> 
             </div>
         </div>
+
+        <div class="w-full max-w-full mx-auto mt-10">
+            <div class="relative">
+                <!-- Background image -->
+                <img src="images/pexels-mart-production-9566328.jpg" alt="Elegant Couple" class="object-cover w-full h-[80vh]">
+
+                <!-- Overlay text content -->
+                <div class="absolute inset-0 flex flex-col justify-center items-center text-center bg-black bg-opacity-50 text-white">
+                    <h1 class="text-5xl font-bold">STYLE THAT SUITS YOU</h1>
+                    <p class="text-lg mt-2">Yours to own, from your wedding day to everyday.</p>
+                    <button class="mt-4 px-6 py-3 bg-white text-black font-semibold rounded-lg  hover:bg-black hover:duration-700 duration-700 hover:text-white">SHOP NOW</button>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    <footer id="footer"></footer>>
 </body>
 
 
