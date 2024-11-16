@@ -109,6 +109,14 @@ router.get('/productmanage', (req,res) =>
     }
 )
 
+router.get('/productedit', (req,res) => 
+    {
+        console.log(`Request at ${req.originalUrl}`);
+        res.sendFile(path.join(`${__dirname}/public/productedit.html`));
+    }
+)
+
+
 router.get('/search', (req,res) => 
     {
         console.log(`Request at ${req.originalUrl}`);
