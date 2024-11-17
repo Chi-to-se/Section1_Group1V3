@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,93 +11,97 @@
 
 <body>
     <nav id="navbar"></nav>
-    <div class="flex justify-center items-center min-h-screen bg-[#1E1E1E] ">
-        <div class="px-6 py-4 w-full max-w-screen-xl h-full">
-            <!-- Search Bar -->
-            <div class="flex items-center mb-4">
-                <input type="text" placeholder="Search"
-                    class="w-full px-4 py-2 text-black  rounded-l-md focus:outline-none">
-                <button class="px-4 py-2 text-white bg-gray-400 hover:bg-gray-300 rounded-r-md">SEARCH</button>
-            </div>
+    <div class="bg-[#1E1E1E]">
+        <main id="back" class="pt-10 px-10 drop-shadow-md"></main>
+        <div class="flex justify-center items-center min-h-screen">
+            <div class="px-6 py-4 w-full max-w-screen-xl h-full">
+                <!-- Search Bar -->
+                <div class="flex items-center mb-4">
+                    <input type="text" placeholder="Search"
+                        class="w-full px-4 py-2 text-black  rounded-l-md focus:outline-none">
+                    <button class="px-4 py-2 text-white bg-gray-400 hover:bg-gray-300 rounded-r-md">SEARCH</button>
+                </div>
 
-            <!-- Table -->
-            <div class="overflow-hidden border rounded-lg bg-white border-gray-700">
-                <table class="w-full text-left table-auto">
-                    <thead class="bg-gray-200 text-xl font-mono">
-                        <tr>
-                            <th class="px-4 py-2">ID</th>
-                            <th class="px-4 py-2">Username</th>
-                            <th class="px-4 py-2 text-right">Edit / Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-t border-gray-600">
-                            <td class="px-4 py-2">6687012</td>
-                            <td class="px-4 py-2">Defend</td>
-                            <td class="px-10 py-2 text-right">
-                                <button class="">
-                                    <img src="images/Edit_blue.svg" alt="ไอคอนedit" class="h-6 w-6 " />
-                                </button>
-                                <button class="ml-14">
-                                    <img src="images/delete_red.svg" alt="ไอคอนdelete" class="h-6 w-6 " />
-                                </button>
-                            </td>
-                        </tr>
+                <!-- Table -->
+                <div class="overflow-hidden border rounded-lg bg-white border-gray-700">
+                    <table class="w-full text-left table-auto">
+                        <thead class="bg-gray-200 text-xl font-mono">
+                            <tr>
+                                <th class="px-4 py-2">ID</th>
+                                <th class="px-4 py-2">Username</th>
+                                <th class="px-4 py-2 text-right">Edit / Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-t border-gray-600">
+                                <td class="px-4 py-2">6687012</td>
+                                <td class="px-4 py-2">Defend</td>
+                                <td class="px-10 py-2 text-right">
+                                    <button class="">
+                                        <img src="images/Edit_blue.svg" alt="ไอคอนedit" class="h-6 w-6 " />
+                                    </button>
+                                    <button class="ml-14">
+                                        <img src="images/delete_red.svg" alt="ไอคอนdelete" class="h-6 w-6 " />
+                                    </button>
+                                </td>
+                            </tr>
 
-                        <!-- Empty Rows -->
-                        <tr class="border-t border-gray-600">
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-10 py-2">&nbsp;</td>
-                        </tr>
-                        <tr class="border-t border-gray-600">
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-10 py-2">&nbsp;</td>
-                        </tr>
-                        <tr class="border-t border-gray-600">
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-10 py-2">&nbsp;</td>
-                        </tr>
-                        <tr class="border-t border-gray-600">
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-10 py-2">&nbsp;</td>
-                        </tr>
-                        <tr class="border-t border-gray-600">
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-10 py-2">&nbsp;</td>
-                        </tr>
-                        <tr class="border-t border-gray-600">
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-10 py-2">&nbsp;</td>
-                        </tr>
-                        <tr class="border-t border-gray-600">
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-10 py-2">&nbsp;</td>
-                        </tr>
-                        <tr class="border-t border-gray-600">
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-4 py-2">&nbsp;</td>
-                            <td class="px-10 py-2">&nbsp;</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                            <!-- Empty Rows -->
+                            <tr class="border-t border-gray-600">
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-10 py-2">&nbsp;</td>
+                            </tr>
+                            <tr class="border-t border-gray-600">
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-10 py-2">&nbsp;</td>
+                            </tr>
+                            <tr class="border-t border-gray-600">
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-10 py-2">&nbsp;</td>
+                            </tr>
+                            <tr class="border-t border-gray-600">
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-10 py-2">&nbsp;</td>
+                            </tr>
+                            <tr class="border-t border-gray-600">
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-10 py-2">&nbsp;</td>
+                            </tr>
+                            <tr class="border-t border-gray-600">
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-10 py-2">&nbsp;</td>
+                            </tr>
+                            <tr class="border-t border-gray-600">
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-10 py-2">&nbsp;</td>
+                            </tr>
+                            <tr class="border-t border-gray-600">
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-4 py-2">&nbsp;</td>
+                                <td class="px-10 py-2">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-            <!-- Add More Button -->
-            <div class="mt-4">
-                <button
-                    class="w-full px-4 py-2 font-bold text-center text-xl text-white bg-gray-400 rounded-md hover:bg-gray-300">
-                    Add More
-                </button>
+                <!-- Add More Button -->
+                <div class="mt-4">
+                    <button
+                        class="w-full px-4 py-2 font-bold text-center text-xl text-white bg-gray-400 rounded-md hover:bg-gray-300">
+                        Add More
+                    </button>
+                </div>
             </div>
         </div>
     </div>
     <footer id="footer"></footer>
 </body>
+
 </html>

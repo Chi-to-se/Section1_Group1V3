@@ -9,3 +9,9 @@ fetch('/components/footer.html')
       .then(data => {
          document.getElementById('footer').innerHTML = data;
       });
+
+fetch('/components/back.html')
+      .then(response => response.text())
+      .then(data => {
+         document.getElementById('back').innerHTML = data;
+      });
