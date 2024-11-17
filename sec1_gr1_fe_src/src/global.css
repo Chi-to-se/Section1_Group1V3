@@ -1,8 +1,8 @@
 
 
 .custom-scrollbar::-webkit-scrollbar {
-    width: 8px; /* ความกว้างของ scrollbar */
-    height: 8px; /* ความสูงของ scrollbar */
+    width: 12px; /* ความกว้างของ scrollbar */
+    height: 12px; /* ความสูงของ scrollbar */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
