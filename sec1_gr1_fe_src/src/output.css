@@ -680,6 +680,10 @@ video {
   margin-top: 1rem;
 }
 
+.mt-48 {
+  margin-top: 12rem;
+}
+
 .mt-6 {
   margin-top: 1.5rem;
 }
@@ -1123,8 +1127,10 @@ video {
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
+.bg-gray-300 {
 .bg-gray-100 {
   --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
