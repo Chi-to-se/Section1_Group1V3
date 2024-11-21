@@ -1,0 +1,20 @@
+{
+  "name": "sec1_gr1_ws_src",
+  "version": "1.0.0",
+  "main": "app-ws.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\"",
+    "server": "nodemon app.js"
+  },
+  "author": "Section1_Hroup1",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "concurrently": "^9.1.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.4",
+    "nodemon": "^3.1.7"
+  }
+}
