@@ -63,13 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         data.forEach((item) => {
           const resultBox = document.createElement('div');
-          resultBox.innerHTML =
+          resultBox.classList.add('border-8','border-pink-800','flex','justify-center','flex-col','items-center','min-h-screen')
+          resultBox.innerHTML = 
             `
-                <p><strong>ID:</strong> ${item.P_ID}</p>
+                <p><strong>Name:</strong> ${item.P_Name}</p>
                 <p><strong>Type:</strong> ${item.P_Type}</p>
                 <p><strong>Brand:</strong> ${item.P_Brand}</p>
-                <p><strong>Name:</strong> ${item.P_Name}</p>
-                <p><strong>Color:</strong> ${item.P_Color}</p>
               `;
           resultContainer.appendChild(resultBox);
         }

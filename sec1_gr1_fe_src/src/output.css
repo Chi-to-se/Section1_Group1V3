@@ -1058,6 +1058,10 @@ video {
   border-width: 1px;
 }
 
+.border-8 {
+  border-width: 8px;
+}
+
 .border-t {
   border-top-width: 1px;
 }
@@ -1084,6 +1088,16 @@ video {
 
 .border-transparent {
   border-color: transparent;
+}
+
+.border-pink-800 {
+  --tw-border-opacity: 1;
+  border-color: rgb(157 23 77 / var(--tw-border-opacity));
+}
+
+.border-l-pink-800 {
+  --tw-border-opacity: 1;
+  border-left-color: rgb(157 23 77 / var(--tw-border-opacity));
 }
 
 .bg-\[\#1E1E1E\] {
