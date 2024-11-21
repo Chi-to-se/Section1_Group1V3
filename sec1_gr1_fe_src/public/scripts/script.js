@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
           resultBox.classList.add('border-8','border-pink-800','flex','justify-center','flex-col','items-center','min-h-screen')
           resultBox.innerHTML = 
             `
+                <img src="http://localhost:3050/image/${item.P_ID}" alt="Product Image">
                 <p><strong>Name:</strong> ${item.P_Name}</p>
                 <p><strong>Type:</strong> ${item.P_Type}</p>
                 <p><strong>Brand:</strong> ${item.P_Brand}</p>
