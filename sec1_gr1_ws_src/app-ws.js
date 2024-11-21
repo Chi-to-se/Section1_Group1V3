@@ -25,6 +25,27 @@ app.use(express.static(path.join(__dirname, 'src')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+// MySQL Create Connection
+const connection = mysql.createConnection
+    (
+        {
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME
+        }
+    );
+
+// Connet to MySQL Server
+connection.connect( err =>
+    {
+        if (err) throw err;
+        console.log('Connected to MySQL')
+    }
+)
+
+
+
 const port = process.env.PORT;
 app.listen(port, () => 
     {
