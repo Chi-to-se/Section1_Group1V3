@@ -60,20 +60,31 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         console.log(data);
-        
+
+        // const gridContainer = document.createElement('div');
+        //   gridContainer.classList.add('grid', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4', 'gap-8', 'mt-8');
+
         data.forEach((item) => {
           const resultBox = document.createElement('div');
-          resultBox.classList.add('border-8','border-pink-800','flex','justify-center','flex-col','items-center','min-h-screen')
-          resultBox.innerHTML = 
+          resultBox.classList.add('flex', 'flex-row', 'flex-wrap',);
+          resultBox.innerHTML =
             `
-                <img src="http://localhost:3050/image/${item.P_ID}" alt="Product Image">
-                <p><strong>Name:</strong> ${item.P_Name}</p>
-                <p><strong>Type:</strong> ${item.P_Type}</p>
-                <p><strong>Brand:</strong> ${item.P_Brand}</p>
+                <div class=" mt-8 ">
+                    <div class="bg-white rounded-lg shadow-md p-4 w-[350px] h-full flex flex-col ">
+                      <img src="http://localhost:3050/image/${item.P_ID}" alt="Product Image"
+                        class="w-[300px] h-[450px] object-cover rounded-t-md transition hover:opacity-90" />
+                      <div class="mt-4 text-center overflow-hidden text-ellipsis">
+                        <h2 class="text-xl font-semibold ">${item.P_Name}</h2>
+                        <p class="text-lg text-gray-500 mt-2">$${item.P_Price}</p>
+                        <p class="text-lg text-gray-500 mt-2">${item.P_Type}</p>
+                        <p class="text-lg text-gray-500 mt-2">${item.P_Brand}}</p>
+                      </div>
+                    </div> 
               `;
           resultContainer.appendChild(resultBox);
         }
         )
+
       }
       )
       .catch((error) => {
@@ -83,3 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+
+
+
+//     <img src="http://localhost:3050/image/${item.P_ID}" alt="Product Image">
+// <p class='bg-white'><strong>Name:</strong> ${item.P_Name}</p>
+// <p><strong>Type:</strong> ${item.P_Type}</p>
+// <p><strong>Brand:</strong> ${item.P_Brand}</p>
