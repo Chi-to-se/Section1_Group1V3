@@ -66,8 +66,13 @@ router.post('/search', upload.single('image'), (req, res) => {
         params.push(productID);
     }
     if (productType) {
-        sql += ` AND P_Type = ?`;
-        params.push(productType);
+        if (productType === 'none'){}
+        else
+            {
+                sql += ` AND P_Type = ?`;
+                params.push(productType);
+            }
+        
     }
     if (productBrand) {
         sql += ` AND P_Brand = ?`;
