@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         class="w-[300px] h-[450px] object-cover rounded-t-md transition hover:opacity-90" />
                       <div class="mt-4 text-center overflow-hidden text-ellipsis">
                         <h2 class="text-xl font-semibold ">${item.P_Name}</h2>
-                        <p class="text-lg text-gray-500 mt-2">$${item.P_Price}</p>
+                        <p class="text-lg text-gray-500 mt-2">฿ ${item.P_Price}</p>
                         <p class="text-lg text-gray-500 mt-2">${item.P_Type}</p>
                         <p class="text-lg text-gray-500 mt-2">${item.P_Brand}}</p>
                       </div>
@@ -137,26 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="text-sm text-gray-400 mb-2">Product ID: ${data.P_ID}</div>
                     <h1 class="text-3xl font-semibold mb-2">${data.P_Name}</h1>
                     <div class="text-gray-500 text-sm mb-4">Brand: ${data.P_Brand}</div>
-                    <div class="text-2xl font-semibold mb-4">$${data.P_Price}</div>
+                    <div class="text-2xl font-semibold mb-4">฿ ${data.P_Price}</div>
 
                     <div class="flex items-center justify-between mb-4">
-                        <div>
-                            <span class="text-gray-400 mr-2">Size</span>
-                            <div class="inline-flex space-x-2">
-                                <button
-                                    class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white"
-                                    data-active="false">S</button>
-                                <button
-                                    class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white"
-                                    data-active="false">M</button>
-                                <button
-                                    class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white"
-                                    data-active="false">L</button>
-                                <button
-                                    class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white"
-                                    data-active="false">XL</button>
-                            </div>
-                        </div>
                         <div class="flex items-center">
                             <span class="text-gray-400 mr-2">Colour:</span>
                             <span class="text-gray-400 mr-2">${data.P_Color}</span>
@@ -172,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </button>
 
                     <div class="flex justify-between text-sm text-gray-600">
-                        <a href="https://${data.P_Source}" class="underline hover:text-gray-400">Link and Reference</a>
+                        <a href="${data.P_Source}" class="underline hover:text-gray-400">Link and Reference</a>
                     </div>
                 </div>
             </div>

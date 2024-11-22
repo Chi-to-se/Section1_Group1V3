@@ -1,0 +1,32 @@
+<div>
+    <span class="text-gray-400 mr-2">Size</span>
+    <div class="inline-flex space-x-2">
+        <button
+            class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white"
+            data-active="false">S</button>
+        <button
+            class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white"
+            data-active="false">M</button>
+        <button
+            class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white"
+            data-active="false">L</button>
+        <button
+            class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white"
+            data-active="false">XL</button>
+    </div>
+</div>
+
+
+<script>
+    // กดเลือก Size จะเปลี่ยนสีเป็นสีดำ
+    const sizeButtons = document.querySelectorAll('.size-button');
+
+    sizeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Reset data-active on all buttons
+            sizeButtons.forEach(btn => btn.setAttribute('data-active', 'false'));
+            // Set data-active on the clicked button
+            button.setAttribute('data-active', 'true');
+        });
+    });
+</script>
