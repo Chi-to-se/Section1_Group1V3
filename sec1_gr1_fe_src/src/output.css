@@ -761,23 +761,6 @@ video {
   height: 100%;
 }
 
-.h-\[\] {
-  height: ;
-}
-
-.h-\[500\] {
-  height: 500;
-}
-
-.h-\[650px\] {
-  height: 650px;
-}
-
-.max-h-max {
-  max-height: -moz-max-content;
-  max-height: max-content;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
@@ -866,8 +849,8 @@ video {
   max-width: 20rem;
 }
 
-.flex-1 {
-  flex: 1 1 0%;
+.max-w-xl {
+  max-width: 36rem;
 }
 
 .table-auto {
@@ -922,10 +905,6 @@ video {
 
 .items-center {
   align-items: center;
-}
-
-.items-stretch {
-  align-items: stretch;
 }
 
 .justify-start {

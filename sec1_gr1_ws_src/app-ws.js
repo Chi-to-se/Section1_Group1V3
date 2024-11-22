@@ -137,6 +137,25 @@ router.get('/image/:id', (req, res) => {
     });
 });
 
+
+// Detail
+router.get("/details/:id", (req, res) => {
+    const query = "SELECT * FROM PRODUCT WHERE P_ID = ?";
+    const { id } = req.params;
+  
+    connection.query(query, [id], (err, results) => {
+      if (err) {
+        console.error("Error fetching item details:", err);
+        res.status(500).json({ error: "Database error" });
+      } else if (results.length === 0) {
+        res.status(404).json({ error: "Item not found" });
+      } else {
+        res.json(results[0]); // Send the first matching result        
+      }
+    });
+  });
+
+
 // router.post('/upload', upload.single('image'),(req, res) => 
 //     {  
 //         const imagetype = req.body.type;

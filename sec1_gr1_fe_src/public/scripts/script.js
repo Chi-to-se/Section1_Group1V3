@@ -19,7 +19,7 @@ fetch('/components/back.html')
 
 
 
-// Workflow     
+// Workflow to search  
 document.addEventListener('DOMContentLoaded', () => {
   const queryForm = document.getElementById('search');
   const resultContainer = document.getElementById('resultContainer');
@@ -81,6 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
                       </div>
                     </div> 
               `;
+              resultBox.addEventListener('click', () => 
+                {
+                  window.location.href= `/detail.html?id=${item.P_ID}`;
+                }
+            );
           resultContainer.appendChild(resultBox);
         }
         )
@@ -92,6 +97,93 @@ document.addEventListener('DOMContentLoaded', () => {
         resultContainer.innerHTML = `<p style="color: red;">Error fetching data</p>`;
       });
   });
+});
+
+
+//Detail page
+document.addEventListener('DOMContentLoaded', () => {
+  const detailContainer = document.getElementById('detailContainer');
+
+  // Extract the item ID from the query string
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get('id');
+
+  if (!productId) {
+    detailContainer.innerHTML = '<p style="color: red;">Invalid product ID.</p>';
+    return;
+  }
+
+  // Fetch product details from the back-end
+  fetch(`http://localhost:3050/details/${productId}`)
+    .then((response) => {
+      if (!response.ok) throw new Error('Product not found');
+      return response.json();
+    })
+    .then((data) => {
+      // Render the product details
+      detailContainer.innerHTML = `
+        <div class="bg-[#f9f9f9]">
+        <main id="back" class="pt-10 px-10 drop-shadow-md"></main>
+        <div class="flex justify-center items-center min-h-screen  ">
+
+            <div class="flex flex-col md:flex-row items-center p-8 ">
+                <div class="flex flex-row gap-4 p-4 drop-shadow-md mb-4 md:mb-0">
+                    <img src="http://localhost:3050/image/${data.P_ID}" alt="Women's Textured Gray Suit"
+                        class="object-cover w-[400px] h-[700px] mb-2 rounded-sm">
+                    <img src="http://localhost:3050/image/${data.P_ID}" alt="Women's Textured Gray Suit_2"
+                        class="object-cover w-[400px] h-[700px] mb-2 rounded-sm">
+                </div>
+                <div class="md:ml-8 max-w-md">
+                    <div class="text-sm text-gray-400 mb-2">Product ID: ${data.P_ID}</div>
+                    <h1 class="text-3xl font-semibold mb-2">${data.P_Name}</h1>
+                    <div class="text-gray-500 text-sm mb-4">Brand: ${data.P_Brand}</div>
+                    <div class="text-2xl font-semibold mb-4">$${data.P_Price}</div>
+
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <span class="text-gray-400 mr-2">Size</span>
+                            <div class="inline-flex space-x-2">
+                                <button
+                                    class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white"
+                                    data-active="false">S</button>
+                                <button
+                                    class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white"
+                                    data-active="false">M</button>
+                                <button
+                                    class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white"
+                                    data-active="false">L</button>
+                                <button
+                                    class="size-button px-3 py-1 border border-black rounded hover:bg-gray-200 data-[active=true]:bg-black data-[active=true]:text-white"
+                                    data-active="false">XL</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-gray-400 mr-2">Colour:</span>
+                            <span class="text-gray-400 mr-2">${data.P_Color}</span>
+                            <div class="w-7 h-7 bg-gray-300 rounded-full"></div>
+
+                        </div>
+                    </div>
+
+                    <button
+                        class="w-full bg-black hover:bg-[#3d3d3d] text-white font-semibold py-2 rounded mb-4 flex items-center justify-center space-x-2 drop-shadow-md">
+                        <img src="images/Pen.svg" alt="ไอคอนedit" class="h-6 w-6 " />
+                        <span>Edit</span>
+                    </button>
+
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <a href="https://${data.P_Source}" class="underline hover:text-gray-400">Link and Reference</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      `;
+    })
+    .catch((error) => {
+      console.error('Error fetching product details:', error);
+      detailContainer.innerHTML = `<p style="color: red;">Error fetching product details.</p>`;
+    });
 });
 
 
