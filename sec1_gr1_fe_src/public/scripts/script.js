@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="flex items-center">
                             <span class="text-gray-400 mr-2">Colour:</span>
                             <span class="text-gray-400 mr-2">${data.P_Color}</span>
-                            <div class="w-7 h-7 bg-gray-300 rounded-full"></div>
+                            <div class="w-7 h-7 rounded-full" style="background-color: ${data.P_Color};"></div>
 
                         </div>
                     </div>

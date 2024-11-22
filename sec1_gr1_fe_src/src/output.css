@@ -849,10 +849,6 @@ video {
   max-width: 20rem;
 }
 
-.max-w-xl {
-  max-width: 36rem;
-}
-
 .table-auto {
   table-layout: auto;
 }
@@ -1156,6 +1152,11 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-red-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {
