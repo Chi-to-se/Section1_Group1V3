@@ -25,16 +25,6 @@ app.use(express.static(path.join(__dirname, 'src')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
-
-
-router.get('/uploadtest', (req,res) => 
-    {
-        console.log(`Request at ${req.originalUrl}`);
-        res.sendFile(path.join(`${__dirname}/public/uploadtest.html`));
-    }
-)
-
 router.get('/', (req,res) => 
     {
         console.log(`Request at ${req.originalUrl}`);
@@ -46,15 +36,6 @@ router.get('/login', (req,res) =>
     {
         console.log(`Request at ${req.originalUrl}`);
         res.sendFile(path.join(`${__dirname}/public/login.html`));
-    }
-)
-
-
-
-router.get('/detail', (req,res) => 
-    {
-        console.log(`Request at ${req.originalUrl}`);
-        res.sendFile(path.join(`${__dirname}/public/detail.html`));
     }
 )
 
@@ -79,13 +60,6 @@ router.get('/search', (req,res) =>
     }
 )
 
-router.get('/searchoutput', (req,res) => 
-    {
-        console.log(`Request at ${req.originalUrl}`);
-        res.sendFile(path.join(`${__dirname}/public/searchoutput.html`));
-    }
-)
-
 router.get('/teampage', (req,res) => 
     {
         console.log(`Request at ${req.originalUrl}`);
@@ -106,8 +80,6 @@ router.get('/useredit', (req,res) =>
         res.sendFile(path.join(`${__dirname}/public/useredit.html`));
     }
 )
-
-
 
 const port = process.env.port;
 app.listen(port, () => 

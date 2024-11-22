@@ -38,7 +38,7 @@ const connection = mysql.createConnection
         }
     );
 
-// Connet to MySQL Server
+// Connect to MySQL Server
 connection.connect( err =>
     {
         if (err) throw err;
