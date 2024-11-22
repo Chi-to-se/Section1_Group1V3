@@ -5,6 +5,7 @@ const mysql = require('mysql2');
 const multer = require('multer');
 const cors = require('cors');
 const fs = require('fs');
+const { log } = require('console');
 
 const app = express();
 const router = express.Router();
@@ -53,11 +54,14 @@ router.post('/search', upload.single('image'), (req, res) => {
     const productBrand = req.body.brand;
     const productName = req.body.name;
     const productColor = req.body.color;
+    const productGender = req.body.gender;
+    console.log(productGender);
+    
 
     console.log(`Request at ${req.originalUrl}`);
 
     // Start with a base SQL query
-    let sql = `SELECT P_ID,P_Name,P_Type,P_Brand,P_Source,P_Color,P_Price FROM PRODUCT WHERE 1=1`;
+    let sql = `SELECT P_ID,P_Name,P_Type,P_Brand,P_Source,P_Color,P_Price,P_Gender FROM PRODUCT WHERE 1=1`;
     const params = [];
 
     // Dynamically add conditions based on provided values
@@ -85,6 +89,16 @@ router.post('/search', upload.single('image'), (req, res) => {
     if (productColor) {
         sql += ` AND P_Color = ?`;
         params.push(productColor);
+    }
+
+    if (productGender) {
+        if (productGender === 'none'){}
+        else
+            {
+                sql += ` AND P_Gender = ?`;
+                params.push(productGender);
+            }
+        
     }
 
     // Execute the query

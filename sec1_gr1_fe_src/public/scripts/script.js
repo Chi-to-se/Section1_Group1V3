@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const queryBrand = document.getElementById('queryBrand').value;
     const queryName = document.getElementById('queryName').value;
     const queryColor = document.getElementById('queryColor').value;
+    const queryGender = document.getElementById('queryGender').value;
 
     // Build a JSON object with the input values
     const requestData = {
@@ -41,7 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
       type: queryType,
       brand: queryBrand,
       name: queryName,
-      color: queryColor
+      color: queryColor,
+      gender: queryGender
     };
 
     // Send data to the back-end using fetch
