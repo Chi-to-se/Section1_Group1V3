@@ -71,23 +71,21 @@ document.addEventListener('DOMContentLoaded', () => {
           resultBox.classList.add('flex', 'flex-row', 'flex-wrap',);
           resultBox.innerHTML =
             `
-                <div class=" mt-8 ">
-                    <div class="bg-white rounded-lg shadow-md p-4 w-[350px] h-full flex flex-col ">
-                      <img src="http://localhost:3050/image/${item.P_ID}" alt="Product Image"
-                        class="w-[300px] h-[450px] object-cover rounded-t-md transition hover:opacity-90" />
-                      <div class="mt-4 text-center overflow-hidden text-ellipsis">
-                        <h2 class="text-xl font-semibold ">${item.P_Name}</h2>
-                        <p class="text-lg text-gray-500 mt-2">฿ ${item.P_Price}</p>
-                        <p class="text-lg text-gray-500 mt-2">${item.P_Type}</p>
-                        <p class="text-lg text-gray-500 mt-2">${item.P_Brand}}</p>
-                      </div>
-                    </div> 
+                <div class="bg-white rounded-lg shadow-md p-4 w-[350px] h-full flex flex-col items-center">
+                  <img src="http://localhost:3050/image/${item.P_ID}" alt="Product Image"
+                   class="w-[300px] h-[450px] object-cover rounded-t-md transition hover:opacity-90" />
+                  <div class="mt-4 text-center overflow-hidden text-ellipsis">
+                  <h2 class="text-xl font-semibold">${item.P_Name}</h2>
+                  <p class="text-lg text-gray-500 mt-2">฿ ${item.P_Price}</p>
+                  <p class="text-lg text-gray-500 mt-2">${item.P_Type}</p>
+                  <p class="text-lg text-gray-500 mt-2">${item.P_Brand}</p>
+                  </div>
+                </div> 
               `;
-              resultBox.addEventListener('click', () => 
-                {
-                  window.location.href= `/detail.html?id=${item.P_ID}`;
-                }
-            );
+          resultBox.addEventListener('click', () => {
+            window.location.href = `/detail.html?id=${item.P_ID}`;
+          }
+          );
           resultContainer.appendChild(resultBox);
         }
         )
@@ -125,15 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
       // Render the product details
       detailContainer.innerHTML = `
         <div class="bg-[#f9f9f9]">
-        <main id="back" class="pt-10 px-10 drop-shadow-md"></main>
+        
         <div class="flex justify-center items-center min-h-screen  ">
 
             <div class="flex flex-col md:flex-row items-center p-8 ">
                 <div class="flex flex-row gap-4 p-4 drop-shadow-md mb-4 md:mb-0">
                     <img src="http://localhost:3050/image/${data.P_ID}" alt="Women's Textured Gray Suit"
                         class="object-cover w-[400px] h-[700px] mb-2 rounded-sm">
-                    <img src="http://localhost:3050/image/${data.P_ID}" alt="Women's Textured Gray Suit_2"
-                        class="object-cover w-[400px] h-[700px] mb-2 rounded-sm">
+    
                 </div>
                 <div class="md:ml-8 max-w-md">
                     <div class="text-sm text-gray-400 mb-2">Product ID: ${data.P_ID}</div>
@@ -152,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     <button
                         class="w-full bg-black hover:bg-[#3d3d3d] text-white font-semibold py-2 rounded mb-4 flex items-center justify-center space-x-2 drop-shadow-md">
-                        <img src="images/Pen.svg" alt="ไอคอนedit" class="h-6 w-6 " />
-                        <span>Edit</span>
+                        <img src="images/bag.svg" alt="ไอคอนตะกร้า" class="h-6 w-6 " />
+                        <span>Add To Cart</span>
                     </button>
 
                     <div class="flex justify-between text-sm text-gray-600">
