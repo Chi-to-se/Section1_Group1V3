@@ -175,6 +175,75 @@ router.get("/details/:id", (req, res) => {
   });
 
 
+
+
+
+// SELECT ALL(PRODUCT)
+router.get('/records',(req,res) => 
+    {
+        const query = `SELECT P_ID,P_Name,P_Type,P_Brand,P_Source,P_Color,P_Price,P_Gender FROM PRODUCT`;
+        connection.query(query, (err, results) => 
+            {
+                if (err)
+                {
+                    return res.status(500).send(err);
+                }
+                res.json(results);
+            }
+        )
+    }
+)
+
+
+// SELECT BY ID(PRODUCT)
+router.get('/records/:id',(req,res) => 
+    {
+        const productID = Number(req.params.id);
+        console.log(typeof(productID));
+        
+        const query = `SELECT P_ID,P_Name,P_Type,P_Brand,P_Source,P_Color,P_Price,P_Gender 
+                        FROM PRODUCT
+                        WHERE P_ID = ?`;
+        connection.query(query, [productID] ,(err, results) => 
+            {
+                if (err)
+                {
+                    return res.status(500).send(err);
+                }
+                res.json(results[0]);
+            }
+        )
+    }
+)
+
+
+// UPDATE PRODUCT
+router.post('/updateproduct', (req, res) => {
+    console.log(req.body);
+    const productID = Number(req.body.id);
+    const productType = req.body.type;
+    const productBrand = req.body.brand;
+    const productName = req.body.name;
+    const productColor = req.body.color;
+    const productGender = req.body.gender;
+    const productPrice = req.body.price;
+    
+    
+    const updateQuery = `
+        UPDATE PRODUCT
+        SET P_ID = ?, P_Name = ?, P_Type = ?, P_Brand = ?, P_Source = ?, P_Color = ?, P_Price = ?
+        WHERE P_ID = ?
+    `;
+    
+    connection.query(updateQuery, [productID, productType, productBrand, productName, productColor, productGender, productPrice, productID], (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Failed to update train data');
+        }
+        res.send('Product data updated successfully');
+    });
+});
+
 // router.post('/upload', upload.single('image'),(req, res) => 
 //     {  
 //         const imagetype = req.body.type;

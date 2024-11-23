@@ -16,36 +16,46 @@
         <div class="flex justify-center items-center min-h-screen pb-10">
             <div
                 class="flex flex-col items-center m-10 w-[700px] h-auto text-2xl text-black font-sans p-20 bg-[#D9D9D9] rounded-2xl ring-offset-2 ring-8 ring-white drop-shadow-xl">
-                <form class="flex flex-col space-y-10">
+                <form action="http://localhost:3050/updateproduct" method="POST" class="flex flex-col space-y-10">
                     <!-- Input fields -->
                     <div class="flex items-center">
-                        <label class="mr-4 w-24 font-bold text-center drop-shadow-md"> ID </label>
-                        <input type="text" class="w-96 p-2 rounded-md bg-white drop-shadow-xl" />
+                        <label for="product-id" class="mr-4 w-24 font-bold text-center drop-shadow-md"> ID </label>
+                        <input id="product-id" name="id" type="text" class="w-96 p-2 rounded-md bg-white drop-shadow-xl" />
                     </div>
                     <div class="flex items-center">
-                        <label class="mr-4 w-24 font-bold text-center drop-shadow-md"> TYPE </label>
-                        <select class="w-96 p-2 rounded-md bg-white drop-shadow-xl">
+                        <label for="product-type" class="mr-4 w-24 font-bold text-center drop-shadow-md"> TYPE </label>
+                        <select id="product-type" name="type" class="w-96 p-2 rounded-md bg-white drop-shadow-xl">
+                            <option value="none">Not selected</option>
                             <option value="Suit">Suit</option>
                             <option value="Tuxedo">Tuxedo</option>
                         </select>
                     </div>
                     <div class="flex items-center">
-                        <label class="mr-4 w-24 font-bold text-center drop-shadow-md"> BRAND </label>
-                        <input type="text" class="w-96 p-2 rounded-md bg-white drop-shadow-xl" />
+                        <label for="product-brand" class="mr-4 w-24 font-bold text-center drop-shadow-md"> BRAND </label>
+                        <input id="product-brand" name="brand" type="text" class="w-96 p-2 rounded-md bg-white drop-shadow-xl" />
                     </div>
                     <div class="flex items-center">
-                        <label class="mr-4 w-24 font-bold text-center drop-shadow-md"> NAME </label>
-                        <input type="text" class="w-96 p-2 rounded-md bg-white drop-shadow-xl" />
+                        <label for="product-name" class="mr-4 w-24 font-bold text-center drop-shadow-md"> NAME </label>
+                        <input id="product-name" name="name" type="text" class="w-96 p-2 rounded-md bg-white drop-shadow-xl" />
                     </div>
                     <div class="flex items-center">
-                        <label class="mr-4 w-24 font-bold text-center drop-shadow-md"> COLOR </label>
-                        <input type="text" class="w-96 p-2 rounded-md bg-white drop-shadow-xl" />
+                        <label for="product-color" class="mr-4 w-24 font-bold text-center drop-shadow-md"> COLOR </label>
+                        <input id="product-color" name="color" type="text" class="w-96 p-2 rounded-md bg-white drop-shadow-xl" />
+                    </div>
+
+                    <div class="flex items-center">
+                        <label for="product-gender" class="mr-4 w-24 font-bold text-center drop-shadow-md"> GENDER </label>
+                        <select id="product-gender" name="gender" class="w-96 p-2 rounded-md bg-white drop-shadow-xl">
+                            <option value="none">Not selected</option>
+                            <option value="Men">Men</option>
+                            <option value="Women">Women</option>
+                        </select>
                     </div>
 
                     <!-- Checkbox field -->
                     <div class="flex items-center">
-                        <label class="mr-4 w-24 font-bold text-center drop-shadow-md"> PRICE </label>
-                        <input type="text" class="w-96 p-2 rounded-md bg-white drop-shadow-xl" />
+                        <label for="product-price" class="mr-4 w-24 font-bold text-center drop-shadow-md"> PRICE </label>
+                        <input id="product-price" name="price" type="text" class="w-96 p-2 rounded-md bg-white drop-shadow-xl" />
                     </div>
 
                     <div class="flex items-center">

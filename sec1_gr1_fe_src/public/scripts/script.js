@@ -170,6 +170,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+// Product Manage
+document.addEventListener('DOMContentLoaded', () => {
+  const tableBodyProduct = document.getElementById('table-body-product');
+
+  fetch('http://localhost:3050/records')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        
+          data.forEach(record => {
+              const row = document.createElement('tr');
+              row.classList.add('border-t', 'border-gray-600');
+
+              row.innerHTML = `
+                  <td class="px-4 py-2">${record.P_ID}</td>
+                  <td class="px-4 py-2">${record.P_Name}</td>
+                  <button class="edit-btn" data-id="${record.P_ID}">
+                          <img src="/images/Edit_blue.svg" alt="Edit Icon" class="h-6 w-6" />
+                  </button>
+                  <button class="delete-btn" data-id="${record.P_ID}">
+                          <img src="/images/Edit_blue.svg" alt="Edit Icon" class="h-6 w-6" />
+                  </button>
+              `;
+
+              tableBodyProduct.appendChild(row);
+          });
+
+          const editButtons = document.querySelectorAll('.edit-btn');
+          editButtons.forEach(button => 
+            {
+              button.addEventListener('click', event => 
+                {
+                  const productID = event.target.closest('button').getAttribute('data-id');
+                  window.location.href = `/productedit?id=${productID}`;
+                }
+              )
+            }
+          )
+      })
+      .catch(error => console.error('Error fetching data:', error));
+});
+
+
+
+// Product Manage button
+document.addEventListener('DOMContentLoaded', () => {
+  // Get the query parameters from the URL
+  const params = new URLSearchParams(window.location.search);
+  const productID = params.get('id');
+
+  // If there's a valid train ID, fetch the corresponding train data
+  if (productID) {
+      fetch(`http://localhost:3050/records/${productID}`)
+          .then(response => response.json())
+          .then(data => {
+              
+              // Pre-fill the form fields with the fetched data
+              document.getElementById('product-id').value = data.P_ID;
+              document.getElementById('product-type').value = data.P_Type;
+              document.getElementById('product-brand').value = data.P_Brand;
+              document.getElementById('product-name').value = data.P_Name;
+              document.getElementById('product-color').value = data.P_Color;
+              document.getElementById('product-gender').value = data.P_Gender;
+              document.getElementById('product-price').value = data.P_Price;
+          })
+          .catch(error => console.error('Error fetching train data:', error));
+  }
+});
 
 //     <img src="http://localhost:3050/image/${item.P_ID}" alt="Product Image">
 // <p class='bg-white'><strong>Name:</strong> ${item.P_Name}</p>
