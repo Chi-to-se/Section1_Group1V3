@@ -217,7 +217,7 @@ router.get('/records/:id',(req,res) =>
 )
 
 
-// UPDATE PRODUCT
+// UPDATE AND INSERT(UPSERT) PRODUCT
 router.post('/updateproduct', upload.single('img'), (req, res) => {
     console.log(req.body);
     console.log(req.file);
@@ -353,7 +353,7 @@ router.get('/admins/:id',(req,res) =>
     }
 )
 
-// UPDATE AND ADD(UPSERT) ADMIN
+// UPDATE AND INSERT(UPSERT) ADMIN
 router.post('/updateadmin', (req, res) => {
     console.log(req.body);
     const adminID = Number(req.body.id);
