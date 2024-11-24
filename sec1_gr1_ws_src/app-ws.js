@@ -218,8 +218,9 @@ router.get('/records/:id',(req,res) =>
 
 
 // UPDATE PRODUCT
-router.post('/updateproduct', (req, res) => {
+router.post('/updateproduct', upload.single('img'), (req, res) => {
     console.log(req.body);
+    console.log(req.file);
     const productID = Number(req.body.id);
     const productType = req.body.type;
     const productBrand = req.body.brand;
@@ -227,15 +228,17 @@ router.post('/updateproduct', (req, res) => {
     const productColor = req.body.color;
     const productGender = req.body.gender;
     const productPrice = req.body.price;
+    const productSource = req.body.source;
+    const productImg = req.file.buffer;
     
     
     const updateQuery = `
         UPDATE PRODUCT
-        SET P_ID = ?, P_Name = ?, P_Type = ?, P_Brand = ?, P_Source = ?, P_Color = ?, P_Price = ?
+        SET P_ID = ?, P_Name = ?, P_Img = ?,P_Type = ?, P_Brand = ?, P_Source = ?, P_Color = ?, P_Price = ?, P_Gender = ?
         WHERE P_ID = ?
     `;
     
-    connection.query(updateQuery, [productID, productType, productBrand, productName, productColor, productGender, productPrice, productID], (err, results) => {
+    connection.query(updateQuery, [productID, productName, productImg, productType, productBrand, productSource, productColor, productPrice, productGender, productID], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Failed to update train data');

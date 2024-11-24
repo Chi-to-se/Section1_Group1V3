@@ -269,6 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
               document.getElementById('product-color').value = data.P_Color;
               document.getElementById('product-gender').value = data.P_Gender;
               document.getElementById('product-price').value = data.P_Price;
+              document.getElementById('product-source').value = data.P_Source;
           })
           .catch(error => console.error('Error fetching train data:', error));
   }

@@ -16,7 +16,7 @@
         <div class="flex justify-center items-center min-h-screen pb-10">
             <div
                 class="flex flex-col items-center m-10 w-[700px] h-auto text-2xl text-black font-sans p-20 bg-[#D9D9D9] rounded-2xl ring-offset-2 ring-8 ring-white drop-shadow-xl">
-                <form action="http://localhost:3050/updateproduct" method="POST" class="flex flex-col space-y-10">
+                <form action="http://localhost:3050/updateproduct" method="POST" enctype="multipart/form-data" class="flex flex-col space-y-10">
                     <!-- Input fields -->
                     <div class="flex items-center">
                         <label for="product-id" class="mr-4 w-24 font-bold text-center drop-shadow-md"> ID </label>
@@ -59,8 +59,13 @@
                     </div>
 
                     <div class="flex items-center">
-                        <label class="mr-4 w-24 font-bold text-center drop-shadow-md"> IMAGE </label>
-                        <input type="file" class="w-96 p-2 rounded-md drop-shadow-xl" />
+                        <label for="product-img" class="mr-4 w-24 font-bold text-center drop-shadow-md"> IMAGE </label>
+                        <input id="product-img" name="img" type="file" class="w-96 p-2 rounded-md drop-shadow-xl" />
+                    </div>
+
+                    <div class="flex items-center">
+                        <label for="product-source" class="mr-4 w-24 font-bold text-center drop-shadow-md"> SOURCE </label>
+                        <input id="product-source" name="source" type="text" class="w-96 p-2 rounded-md drop-shadow-xl" />
                     </div>
 
                     <button
