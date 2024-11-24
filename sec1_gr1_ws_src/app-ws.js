@@ -221,7 +221,7 @@ router.get('/records/:id',(req,res) =>
 router.post('/updateproduct', upload.single('img'), (req, res) => {
     console.log(req.body);
     console.log(req.file);
-    
+
     const productID = Number(req.body.id);
     const productType = req.body.type;
     const productBrand = req.body.brand;
@@ -230,30 +230,64 @@ router.post('/updateproduct', upload.single('img'), (req, res) => {
     const productGender = req.body.gender;
     const productPrice = req.body.price;
     const productSource = req.body.source;
-    const productImg = req.file.buffer;
-    
-    const upsertQuery = `
-        INSERT INTO PRODUCT (P_ID, P_Name, P_Img, P_Type, P_Brand, P_Source, P_Color, P_Price, P_Gender)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ON DUPLICATE KEY UPDATE 
-            P_Name = VALUES(P_Name),
-            P_Img = VALUES(P_Img),
-            P_Type = VALUES(P_Type),
-            P_Brand = VALUES(P_Brand),
-            P_Source = VALUES(P_Source),
-            P_Color = VALUES(P_Color),
-            P_Price = VALUES(P_Price),
-            P_Gender = VALUES(P_Gender)
-    `;
 
-    connection.query(upsertQuery, [productID, productName, productImg, productType, productBrand, productSource, productColor, productPrice, productGender], (err, results) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Failed to save product data');
+    // Use the new image if uploaded, otherwise use the current image from the database
+    let productImg = req.file ? req.file.buffer : null;
+
+    if (!productImg) 
+        {
+        // If no image is uploaded, fetch the current image from the database
+        connection.query('SELECT P_Img FROM PRODUCT WHERE P_ID = ?', [productID], (err, results) => 
+            {
+            if (err) return res.status(500).send('Database error');
+            if (results.length > 0) 
+                {
+                    productImg = results[0].P_Img; // Retain the old image
+                } 
+            else 
+                {
+                    return res.status(404).send('Product not found');
+                }
+
+            // Update the product with the old or new image
+            updateProduct();
+            }
+            );
+        } 
+    else 
+        {
+        // Update the product with the new image
+            updateProduct();
         }
-        res.redirect('http://localhost:3040/productmanage');
-    });
+
+    function updateProduct() 
+    {
+        const upsertQuery = `
+            INSERT INTO PRODUCT (P_ID, P_Name, P_Img, P_Type, P_Brand, P_Source, P_Color, P_Price, P_Gender)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE 
+                P_Name = VALUES(P_Name),
+                P_Img = VALUES(P_Img),
+                P_Type = VALUES(P_Type),
+                P_Brand = VALUES(P_Brand),
+                P_Source = VALUES(P_Source),
+                P_Color = VALUES(P_Color),
+                P_Price = VALUES(P_Price),
+                P_Gender = VALUES(P_Gender)
+        `;
+
+        connection.query(upsertQuery, [productID, productName, productImg, productType, productBrand, productSource, productColor, productPrice, productGender], (err, results) => {
+            if (err) 
+                {
+                    console.error(err);
+                    return res.status(500).send('Failed to save product data');
+                }
+            res.redirect('http://localhost:3040/productmanage');
+        });
+    }
 });
+
+
 
 
 // DELETE BY ID(PRODUCT)
