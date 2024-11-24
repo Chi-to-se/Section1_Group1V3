@@ -221,6 +221,7 @@ router.get('/records/:id',(req,res) =>
 router.post('/updateproduct', upload.single('img'), (req, res) => {
     console.log(req.body);
     console.log(req.file);
+    
     const productID = Number(req.body.id);
     const productType = req.body.type;
     const productBrand = req.body.brand;
@@ -231,21 +232,29 @@ router.post('/updateproduct', upload.single('img'), (req, res) => {
     const productSource = req.body.source;
     const productImg = req.file.buffer;
     
-    
-    const updateQuery = `
-        UPDATE PRODUCT
-        SET P_ID = ?, P_Name = ?, P_Img = ?,P_Type = ?, P_Brand = ?, P_Source = ?, P_Color = ?, P_Price = ?, P_Gender = ?
-        WHERE P_ID = ?
+    const upsertQuery = `
+        INSERT INTO PRODUCT (P_ID, P_Name, P_Img, P_Type, P_Brand, P_Source, P_Color, P_Price, P_Gender)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE 
+            P_Name = VALUES(P_Name),
+            P_Img = VALUES(P_Img),
+            P_Type = VALUES(P_Type),
+            P_Brand = VALUES(P_Brand),
+            P_Source = VALUES(P_Source),
+            P_Color = VALUES(P_Color),
+            P_Price = VALUES(P_Price),
+            P_Gender = VALUES(P_Gender)
     `;
-    
-    connection.query(updateQuery, [productID, productName, productImg, productType, productBrand, productSource, productColor, productPrice, productGender, productID], (err, results) => {
+
+    connection.query(upsertQuery, [productID, productName, productImg, productType, productBrand, productSource, productColor, productPrice, productGender], (err, results) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('Failed to update train data');
+            return res.status(500).send('Failed to save product data');
         }
-        res.send('Product data updated successfully');
+        res.send('Product data saved successfully');
     });
 });
+
 
 // DELETE BY ID(PRODUCT)
 router.delete('/deleteproduct/:id',(req,res) => 
@@ -310,7 +319,7 @@ router.get('/admins/:id',(req,res) =>
     }
 )
 
-// UPDATE AND ADD ADMIN
+// UPDATE AND ADD(UPSERT) ADMIN
 router.post('/updateadmin', (req, res) => {
     console.log(req.body);
     const adminID = Number(req.body.id);

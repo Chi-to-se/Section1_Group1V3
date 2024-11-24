@@ -247,6 +247,15 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(error => console.error('Error fetching data:', error));
 });
 
+// Add more Product
+document.addEventListener('DOMContentLoaded', () => {
+  const addMoreButton = document.getElementById('add-more-product');
+  
+  addMoreButton.addEventListener('click', () => {
+      window.location.href = '/productedit';
+  });
+});
+
 
 
 // Product Manage button
@@ -366,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(error => console.error('Error fetching data:', error));
 });
 
-// Add more
+// Add more Admin
 document.addEventListener('DOMContentLoaded', () => {
   const addMoreButton = document.getElementById('add-more-admin');
   
