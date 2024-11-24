@@ -341,7 +341,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
 // Admin Manage button
 document.addEventListener('DOMContentLoaded', () => {
   // Get the query parameters from the URL

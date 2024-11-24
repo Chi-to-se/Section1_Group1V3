@@ -247,6 +247,11 @@ router.post('/updateproduct', (req, res) => {
 
 
 
+
+
+
+
+
 // SELECT ALL(ADMIN)
 router.get('/admins',(req,res) => 
     {
@@ -313,7 +318,7 @@ router.post('/updateadmin', (req, res) => {
             console.error(err);
             return res.status(500).send('Failed to save admin data');
         }
-        res.send('Admin data saved successfully');
+        res.redirect('http://localhost:3040/usermanage')
     });
 });
 
