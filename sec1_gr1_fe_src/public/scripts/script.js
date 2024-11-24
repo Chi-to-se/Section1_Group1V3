@@ -330,6 +330,18 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(error => console.error('Error fetching data:', error));
 });
 
+// Add more
+document.addEventListener('DOMContentLoaded', () => {
+  const addMoreButton = document.getElementById('add-more-admin');
+  
+  addMoreButton.addEventListener('click', () => {
+      window.location.href = '/useredit';
+  });
+});
+
+
+
+
 // Admin Manage button
 document.addEventListener('DOMContentLoaded', () => {
   // Get the query parameters from the URL

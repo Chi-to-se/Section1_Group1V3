@@ -285,7 +285,7 @@ router.get('/admins/:id',(req,res) =>
     }
 )
 
-// UPDATE ADMIN
+// UPDATE AND ADD ADMIN
 router.post('/updateadmin', (req, res) => {
     console.log(req.body);
     const adminID = Number(req.body.id);
@@ -295,22 +295,28 @@ router.post('/updateadmin', (req, res) => {
     const adminLastname = req.body.lastname;
     const adminBirthdate = req.body.birthdate;
     const adminAddress = req.body.address;
-    
-    
-    const updateQuery = `
-        UPDATE ADMIN
-        SET A_ID = ?, A_Username = ?, A_Password = ?, A_Firstname = ?, A_Lastname = ?, A_BirthDate = ?, A_Address = ?
-        WHERE A_ID = ?
+
+    const upsertQuery = `
+        INSERT INTO ADMIN (A_ID, A_Username, A_Password, A_Firstname, A_Lastname, A_BirthDate, A_Address)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE
+        A_Username = VALUES(A_Username),
+        A_Password = VALUES(A_Password),
+        A_Firstname = VALUES(A_Firstname),
+        A_Lastname = VALUES(A_Lastname),
+        A_BirthDate = VALUES(A_BirthDate),
+        A_Address = VALUES(A_Address);
     `;
-    
-    connection.query(updateQuery, [adminID, adminUser, adminPass, adminFirstname, adminLastname, adminBirthdate, adminAddress, adminID], (err, results) => {
+
+    connection.query(upsertQuery, [adminID, adminUser, adminPass, adminFirstname, adminLastname, adminBirthdate, adminAddress], (err, results) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('Failed to update train data');
+            return res.status(500).send('Failed to save admin data');
         }
-        res.send('Product data updated successfully');
+        res.send('Admin data saved successfully');
     });
 });
+
 
 
 // DELETE BY ID(ADMIN)
