@@ -244,6 +244,76 @@ router.post('/updateproduct', (req, res) => {
     });
 });
 
+
+
+
+// SELECT ALL(ADMIN)
+router.get('/admins',(req,res) => 
+    {
+        const query = `SELECT * FROM ADMIN`;
+        connection.query(query, (err, results) => 
+            {
+                if (err)
+                {
+                    return res.status(500).send(err);
+                }
+                res.json(results);
+            }
+        )
+    }
+)
+
+
+
+// SELECT BY ID(ADMIN)
+router.get('/admins/:id',(req,res) => 
+    {
+        const adminID = Number(req.params.id);
+        console.log(adminID);
+        console.log(typeof(adminID));
+        
+        const query = `SELECT * FROM ADMIN WHERE A_ID = ?`;
+        connection.query(query, [adminID] ,(err, results) => 
+            {
+                if (err)
+                {
+                    return res.status(500).send(err);
+                }
+                res.json(results[0]);
+            }
+        )
+    }
+)
+
+// UPDATE ADMIN
+router.post('/updateadmin', (req, res) => {
+    console.log(req.body);
+    const adminID = Number(req.body.id);
+    const adminUser = req.body.username;
+    const adminPass = req.body.password;
+    const adminFirstname = req.body.firstname;
+    const adminLastname = req.body.lastname;
+    const adminBirthdate = req.body.birthdate;
+    const adminAddress = req.body.address;
+    
+    
+    const updateQuery = `
+        UPDATE ADMIN
+        SET A_ID = ?, A_Username = ?, A_Password = ?, A_Firstname = ?, A_Lastname = ?, A_BirthDate = ?, A_Address = ?
+        WHERE A_ID = ?
+    `;
+    
+    connection.query(updateQuery, [adminID, adminUser, adminPass, adminFirstname, adminLastname, adminBirthdate, adminAddress, adminID], (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Failed to update train data');
+        }
+        res.send('Product data updated successfully');
+    });
+});
+
+
+
 // router.post('/upload', upload.single('image'),(req, res) => 
 //     {  
 //         const imagetype = req.body.type;

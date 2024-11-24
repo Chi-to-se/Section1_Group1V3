@@ -239,6 +239,94 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Admin Manage
+document.addEventListener('DOMContentLoaded', () => {
+  const tableBodyProduct = document.getElementById('table-body-admin');
+
+  fetch('http://localhost:3050/admins')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        
+          data.forEach(record => {
+              const row = document.createElement('tr');
+              row.classList.add('border-t', 'border-gray-600');
+
+              row.innerHTML = `
+                  <td class="px-4 py-2">${record.A_ID}</td>
+                  <td class="px-4 py-2">${record.A_Username}</td>
+                  <button class="edit-btn-admin" data-id="${record.A_ID}">
+                          <img src="/images/Edit_blue.svg" alt="Edit Icon" class="h-6 w-6" />
+                  </button>
+                  <button class="delete-btn-admin" data-id="${record.A_ID}">
+                          <img src="/images/Edit_blue.svg" alt="Edit Icon" class="h-6 w-6" />
+                  </button>
+              `;
+
+              tableBodyProduct.appendChild(row);
+          });
+
+          const editButtons = document.querySelectorAll('.edit-btn-admin');
+          editButtons.forEach(button => 
+            {
+              button.addEventListener('click', event => 
+                {
+                  const productID = event.target.closest('button').getAttribute('data-id');
+                  window.location.href = `/useredit?id=${productID}`;
+                }
+              )
+            }
+          )
+      })
+      .catch(error => console.error('Error fetching data:', error));
+});
+
+// Admin Manage button
+document.addEventListener('DOMContentLoaded', () => {
+  // Get the query parameters from the URL
+  const params = new URLSearchParams(window.location.search);
+  const adminID = params.get('id');
+
+  // If there's a valid train ID, fetch the corresponding train data
+  if (adminID) {
+      fetch(`http://localhost:3050/admins/${adminID}`)
+          .then(response => response.json())
+          .then(data => {
+              
+              // Pre-fill the form fields with the fetched data
+              document.getElementById('admin-id').value = data.A_ID;
+              document.getElementById('admin-user').value = data.A_Username;
+              document.getElementById('admin-pass').value = data.A_Password;
+              document.getElementById('admin-firstname').value = data.A_FirstName;
+              document.getElementById('admin-lastname').value = data.A_LastName;
+              document.getElementById('admin-bdate').value = data.A_BirthDate;
+              document.getElementById('admin-address').value = data.A_Address;
+          })
+          .catch(error => console.error('Error fetching train data:', error));
+  }
+});
+
+
+
+
+
 //     <img src="http://localhost:3050/image/${item.P_ID}" alt="Product Image">
 // <p class='bg-white'><strong>Name:</strong> ${item.P_Name}</p>
 // <p><strong>Type:</strong> ${item.P_Type}</p>
