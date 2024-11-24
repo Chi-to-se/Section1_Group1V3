@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
                           <img src="/images/Edit_blue.svg" alt="Edit Icon" class="h-6 w-6" />
                   </button>
                   <button class="delete-btn" data-id="${record.P_ID}">
-                          <img src="/images/Edit_blue.svg" alt="Edit Icon" class="h-6 w-6" />
+                          <img src="/images/Delete_red.svg" alt="Edit Icon" class="h-6 w-6" />
                   </button>
               `;
 
@@ -208,6 +208,41 @@ document.addEventListener('DOMContentLoaded', () => {
               )
             }
           )
+
+          const deleteButtons = document.querySelectorAll('.delete-btn');
+          deleteButtons.forEach(button => 
+            {
+              button.addEventListener('click', event => 
+                {
+                  const productID = event.target.closest('button').getAttribute('data-id');
+
+                  fetch(`http://localhost:3050/deleteproduct/${productID}`, {method: 'DELETE',})
+                  .then(response => response.text())
+                  .then(data => 
+                    {
+                      if (data === "Delete succesfully")
+                      {
+                        event.target.closest('tr').remove();
+                        alert('Product delete succesfully');
+                      }
+                      else
+                      {
+                        alert('Failed to delete')
+                      }
+                    }
+                  ).catch(error => 
+                    {
+                      console.error('Error deleting product:', error);
+                      alert('Error deleting product')
+                    }
+                  )
+                }
+              )
+            }
+          )
+
+
+
       })
       .catch(error => console.error('Error fetching data:', error));
 });

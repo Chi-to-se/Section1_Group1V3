@@ -244,7 +244,24 @@ router.post('/updateproduct', (req, res) => {
     });
 });
 
-
+// DELETE BY ID(PRODUCT)
+router.delete('/deleteproduct/:id',(req,res) => 
+    {
+        const adminID = Number(req.params.id);
+        console.log(adminID);
+        
+        const query = `DELETE FROM PRODUCT WHERE P_ID = ?`;
+        connection.query(query, [adminID] , (err, results) => 
+            {
+                if (err)
+                {
+                    return res.status(500).send(err);
+                }
+                res.send("Delete succesfully");
+            }
+        )
+    }
+)
 
 
 
