@@ -251,7 +251,7 @@ router.post('/updateproduct', upload.single('img'), (req, res) => {
             console.error(err);
             return res.status(500).send('Failed to save product data');
         }
-        res.send('Product data saved successfully');
+        res.redirect('http://localhost:3040/productmanage');
     });
 });
 
