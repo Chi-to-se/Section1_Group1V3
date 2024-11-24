@@ -313,6 +313,27 @@ router.post('/updateadmin', (req, res) => {
 });
 
 
+// DELETE BY ID(ADMIN)
+router.delete('/deleteadmin/:id',(req,res) => 
+    {
+        const adminID = Number(req.params.id);
+        console.log(adminID);
+        
+        const query = `DELETE FROM ADMIN WHERE A_ID = ?`;
+        connection.query(query, [adminID] , (err, results) => 
+            {
+                if (err)
+                {
+                    return res.status(500).send(err);
+                }
+                res.send("Delete succesfully");
+            }
+        )
+    }
+)
+
+
+
 
 // router.post('/upload', upload.single('image'),(req, res) => 
 //     {  
