@@ -309,14 +309,21 @@ document.addEventListener('DOMContentLoaded', () => {
       fetch(`http://localhost:3050/admins/${adminID}`)
           .then(response => response.json())
           .then(data => {
-              
               // Pre-fill the form fields with the fetched data
               document.getElementById('admin-id').value = data.A_ID;
               document.getElementById('admin-user').value = data.A_Username;
               document.getElementById('admin-pass').value = data.A_Password;
               document.getElementById('admin-firstname').value = data.A_FirstName;
               document.getElementById('admin-lastname').value = data.A_LastName;
-              document.getElementById('admin-bdate').value = data.A_BirthDate;
+
+              // Format birth date for input[type="date"] as yyyy-mm-dd
+              const birthDate = new Date(data.A_BirthDate);  
+              const year = birthDate.getUTCFullYear();  
+              const month = String(birthDate.getUTCMonth() + 1).padStart(2, '0');  
+              const day = String(birthDate.getUTCDate()).padStart(2, '0');  
+              const formattedDateForInput = `${year}-${month}-${day}`; 
+
+              document.getElementById('admin-bdate').value = formattedDateForInput;
               document.getElementById('admin-address').value = data.A_Address;
           })
           .catch(error => console.error('Error fetching train data:', error));
