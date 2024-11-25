@@ -19,6 +19,7 @@ fetch('/components/back.html')
 
 
 
+
 // Workflow to search  
 document.addEventListener('DOMContentLoaded', () => {
   const queryForm = document.getElementById('search');
@@ -186,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
               row.innerHTML = `
                   <td class="px-4 py-2">${record.P_ID}</td>
                   <td class="px-4 py-2">${record.P_Name}</td>
+                  <td class="px-10 py-2 flex justify-end gap-14">
                   <button class="edit-btn" data-id="${record.P_ID}">
                           <img src="/images/Edit_blue.svg" alt="Edit Icon" class="h-6 w-6" />
                   </button>
@@ -286,21 +288,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Admin Manage
 document.addEventListener('DOMContentLoaded', () => {
   const tableBodyProduct = document.getElementById('table-body-admin');
@@ -317,6 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
               row.innerHTML = `
                   <td class="px-4 py-2">${record.A_ID}</td>
                   <td class="px-4 py-2">${record.A_Username}</td>
+                  <td class="px-10 py-2 flex justify-end gap-14">
                   <button class="edit-btn-admin" data-id="${record.A_ID}">
                           <img src="/images/Edit_blue.svg" alt="Edit Icon" class="h-6 w-6" />
                   </button>
@@ -417,6 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
           .catch(error => console.error('Error fetching train data:', error));
   }
 });
+
 
 
 
