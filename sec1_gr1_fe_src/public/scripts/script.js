@@ -10,15 +10,6 @@ fetch('/components/footer.html')
     document.getElementById('footer').innerHTML = data;
   });
 
-fetch('/components/back.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('back').innerHTML = data;
-  });
-
-
-
-
 
 // Workflow to search  
 document.addEventListener('DOMContentLoaded', () => {
