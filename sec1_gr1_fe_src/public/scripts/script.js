@@ -10,6 +10,13 @@ fetch('/components/footer.html')
     document.getElementById('footer').innerHTML = data;
   });
 
+function logout() {
+  // Clear all data from localStorage   
+  localStorage.clear();
+
+  // Redirect to login page
+  window.location.href = 'http://localhost:3040/login'; // Change '/login' to your login page URL
+}
 
 // Workflow to search  
 document.addEventListener('DOMContentLoaded', () => {
