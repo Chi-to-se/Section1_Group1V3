@@ -71,7 +71,32 @@
             </div>
         </div>
     </div>
-    
+    <div id="map"></div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #map {
+            height: 400px; 
+            width: 100%;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAu2g9J5anRHzxF6r2Szu0moQGtaP55C-M&callback=initMap" async defer></script>
+
+    <script>
+        function initMap() {
+            const location = { lat: 37.7749, lng: -122.4194 };  // Example: San Francisco coordinates
+
+
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,  
+                center: location  
+            });
+
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+    </script>
     <footer id="footer"></footer>
 </body>
 
