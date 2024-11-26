@@ -71,19 +71,27 @@
             </div>
         </div>
     </div>
+    <div class="bg-[#D9D9D9] h-full">
+        <div class="container mx-auto px-4 py-20">
+            <h1 class="text-3xl font-semibold font-serif mb-4">Store Location</h1>
+
+                <div class="w-full max-w-full border-t border-black my-4"></div>
+            
+        
+
     <div id="map"></div>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         #map {
-            height: 400px; 
+            height: 300px; 
             width: 100%;
         }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAu2g9J5anRHzxF6r2Szu0moQGtaP55C-M&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAu2g9J5anRHzxF6r2Szu0moQGtaP55C-M&callback=initMap" async defer ></script>
 
     <script>
         function initMap() {
-            const location = { lat: 37.7749, lng: -122.4194 };  // Example: San Francisco coordinates
+            const location = { lat: 13.79449, lng: 100.32567 };  
 
 
             const map = new google.maps.Map(document.getElementById('map'), {
@@ -97,6 +105,9 @@
             });
         }
     </script>
+    </div>
+    </div>
+</div>
     <footer id="footer"></footer>
 </body>
 

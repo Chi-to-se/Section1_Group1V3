@@ -85,7 +85,7 @@ router.post('/login', (req, res) => {
         const token = jwt.sign(
             { username: user.A_Username, role: user.A_Role }, // Use the correct fields from your database
             process.env.JWT_SECRET,
-            { expiresIn: '1m' }  // Token expiration time
+            { expiresIn: '10m' }  // Token expiration time
         );
 
         // Send the token to the client
