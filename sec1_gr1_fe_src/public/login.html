@@ -26,7 +26,7 @@
           </h2>
         </div>
         <!-- input email --> 
-        <form class="mt-8 space-y-6">
+        <form id="login-form" method="POST" class="mt-8 space-y-6">
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
               <label for="email-address" class="sr-only">Email address</label>
@@ -69,5 +69,42 @@
 
   </div>
   <footer id="footer"></footer>
+  <script>
+    const form = document.getElementById('login-form');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent page reload
+
+        const username = document.getElementById('Lusername').value;
+        const password = document.getElementById('Lpassword').value;
+
+        try {
+            const response = await fetch('http://localhost:3050/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                alert("Login Successfully");
+
+                // Store token in localStorage or sessionStorage
+                localStorage.setItem('token', data.token);
+
+                // Redirect to a protected page (example: product management)
+                window.location.href = '/';
+            } else {
+                const error = await response.text();
+                alert("Login Failed");;
+            }
+        } catch (err) {
+            console.error(err);
+            alert("An error occured Please try again");;
+        }
+    });
+  </script>
 </body>
 </html>

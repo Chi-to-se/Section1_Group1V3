@@ -6,6 +6,7 @@ const multer = require('multer');
 const cors = require('cors');
 const fs = require('fs');
 const { log } = require('console');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const router = express.Router();
@@ -46,6 +47,58 @@ connection.connect( err =>
         console.log('Connected to MySQL')
     }
 )
+
+// Login
+router.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    console.log(req.body);
+
+    // Check if the user exists in the database (using SQL)
+    let sql = `SELECT * FROM ADMIN WHERE A_Username = ?`;
+    connection.query(sql, [username], (err, result) => {
+        if (err) {
+            console.error('Error querying database:', err);
+            return res.status(500).send('Server error');
+        }
+
+        if (result.length === 0) {
+            return res.status(401).send('Invalid username or password');
+        }
+
+        // Get the user record from the result
+        const user = result[0];  // Assuming there's only one match
+
+        // Verify the password using bcrypt
+        console.log(password, user.A_Password);
+        
+
+        if (err) {
+            console.error('Error comparing passwords:', err);
+            return res.status(500).send('Server error');
+        }
+        if (password != user.A_Password) {
+            return res.status(401).send(`Invalid username or password`);
+        }
+
+        
+        // Create a JWT token with user info (e.g., username, role)
+        const token = jwt.sign(
+            { username: user.A_Username, role: user.A_Role }, // Use the correct fields from your database
+            process.env.JWT_SECRET,
+            { expiresIn: '1m' }  // Token expiration time
+        );
+
+        // Send the token to the client
+        res.json({ token });
+        
+    });
+});
+
+
+
+
+
+
 
 // Test upload/search data to MySQL
 router.post('/search', upload.single('image'), (req, res) => {
