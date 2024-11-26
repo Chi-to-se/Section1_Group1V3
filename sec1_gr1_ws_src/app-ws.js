@@ -26,8 +26,8 @@ router.use(express.urlencoded({ extended : true }));
 
 // Static Middleware
 app.use(express.static(path.join(__dirname, 'src')));
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(path.join(__dirname, 'sec1_gr1_fe_src/public')));
+app.use(express.static(path.join(__dirname, 'images')));
 
 // MySQL Create Connection
 const connection = mysql.createConnection
@@ -167,11 +167,10 @@ router.get('/image/:id', (req, res) => {
         }
         if (results.length === 0) {
             return res.status(404).send('Image not found');
-        }
-        
+        }       
         const { P_Name, P_Img } = results[0];
         console.log("Image record:", { P_Name, P_Img });
-        
+
         // Find type of image in the MIME
         const fileExtension = path.extname(P_Name).toLowerCase();
         let mimeType;
@@ -191,6 +190,7 @@ router.get('/image/:id', (req, res) => {
                 mimeType = 'application/octet-stream';  // Fallback for unknown types
         }
 
+       
         console.log('Image data length:', P_Img.length);
         console.log('File extension:', fileExtension);
         console.log('Mime type:', mimeType);
@@ -204,6 +204,7 @@ router.get('/image/:id', (req, res) => {
 
 // Details
 router.get("/details/:id", (req, res) => {
+    
     const query = "SELECT * FROM PRODUCT WHERE P_ID = ?";
     const { id } = req.params;
   
@@ -222,7 +223,10 @@ router.get("/details/:id", (req, res) => {
 
 
 
-
+// Testing SELECT ALL PRODUCT
+// method: get
+// URL: http://localhost:3050/records
+// body: raw JSON 
 // SELECT ALL(PRODUCT)
 router.get('/records',(req,res) => 
     {
@@ -239,6 +243,21 @@ router.get('/records',(req,res) =>
     }
 )
 
+// Testing SELECT PRODUCT BY ID 1
+// method: get 
+// URL: http://localhost:3050/records/1
+// body: raw JSON 
+// { 
+//   "productID": 1
+// }
+
+// Testing SELECT PRODUCT BY ID 2
+// method: get 
+// URL: http://localhost:3050/records/2
+// body: raw JSON 
+// { 
+//   "productID": 2
+// }
 
 // SELECT BY ID(PRODUCT)
 router.get('/records/:id',(req,res) => 
@@ -262,6 +281,66 @@ router.get('/records/:id',(req,res) =>
 )
 
 
+// Testing INSERT PRODUCT 1
+// method: post
+// URL: http://localhost:3050/updateproduct
+// body: raw JSON 
+// { 
+//     "id" : 11,
+//     "type" : "Suit",
+//     "brand" : "michaeltailors",
+//     "name" : "Men Blue Suits With Vest",
+//     "color" : "Blue",
+//     "gender" : "Men",
+//     "price" : 9000,
+//     "source" : "https://michaeltailors.com/products/men-blue-suits-with-vest/"
+//   }
+
+// Testing INSERT PRODUCT 2
+// method: post
+// URL: http://localhost:3050/updateproduct
+// body: raw JSON 
+// { 
+//   "id" : 12,
+//   "type" : "Suit",
+//   "brand" : "michaeltailors",
+//   "name" : "Men Casual Black Suits",
+//   "color" : "Black",
+//   "gender" : "Men",
+//   "price" : "12000",
+//   "source" : "https://michaeltailors.com/products/men-casual-black-suits/"
+// }
+
+// Testing UPDATE PRODUCT 1
+// method: post
+// URL: http://localhost:3050/updateproduct
+// body: raw JSON 
+// { 
+//   "id" : 11,
+//   "type" : "Tuxedo",
+//   "brand" : "oxfordtailor",
+//   "name" : "BLACK TUXEDO SUITS",
+//   "color" : "Black",
+//   "gender" : "Men",
+//   "price" : "7500",
+//   "source" : "https://www.oxfordtailor.com/black-tuxedo-suits.html?_gl=1*12olcpm*_up*MQ..*_gs*MQ..&gclid=Cj0KCQiAgJa6BhCOARIsAMiL7V8oF34KfGnwE8e4rHhOL03JC-xwtqOWwVCU9ZFJYI-DcDmo7TsDZMAaAoSBEALw_wcB"
+// }
+
+// Testing UPDATE PRODUCT 2
+// method: post
+// URL: http://localhost:3050/updateproduct
+// body: raw JSON 
+// { 
+//   "id" : 12,
+//   "type" : "Suit",
+//   "brand" : "oxfordtailor",
+//   "name" : "ARMY TAILOR SUITS",
+//   "color" : "Green",
+//   "gender" : "Men",
+//   "price" : "8000",
+//   "source" : "https://www.oxfordtailor.com/custom-made-army-suits.html?_gl=1*1ii90q3*_up*MQ..*_gs*MQ..&gclid=Cj0KCQiAgJa6BhCOARIsAMiL7V8oF34KfGnwE8e4rHhOL03JC-xwtqOWwVCU9ZFJYI-DcDmo7TsDZMAaAoSBEALw_wcB"
+// }
+
 // UPDATE AND INSERT(UPSERT) PRODUCT
 router.post('/updateproduct', upload.single('img'), (req, res) => {
     console.log(req.body);
@@ -278,63 +357,52 @@ router.post('/updateproduct', upload.single('img'), (req, res) => {
 
     // Use the new image if uploaded or use null
     let productImg = req.file ? req.file.buffer : null;
-
-    if (!productImg) 
+    if (productImg === null)
         {
-        // If no image is uploaded, fetch the current image from the database
-        connection.query('SELECT P_Img FROM PRODUCT WHERE P_ID = ?', [productID], (err, results) => 
-            {
-            if (err) return res.status(500).send('Database error');
-            if (results.length > 0) 
-                {
-                    productImg = results[0].P_Img; 
-                } 
-            else 
-                {
-                    return res.status(404).send('Product not found');
-                }
-
-            // Update the product with the old or new image
-            updateProduct();
-            }
-            );
-        } 
-    else 
-        {
-        // Update the product with the new image
-            updateProduct();
+            const defaultImagePath = path.join(__dirname, '/images/IMGnotfound.png');
+            productImg = fs.readFileSync(defaultImagePath); // Read the default image file
         }
 
-    function updateProduct() 
-    {
-        // Query code
-        const upsertQuery = `
-            INSERT INTO PRODUCT (P_ID, P_Name, P_Img, P_Type, P_Brand, P_Source, P_Color, P_Price, P_Gender)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ON DUPLICATE KEY UPDATE 
-                P_Name = VALUES(P_Name),
-                P_Img = VALUES(P_Img),
-                P_Type = VALUES(P_Type),
-                P_Brand = VALUES(P_Brand),
-                P_Source = VALUES(P_Source),
-                P_Color = VALUES(P_Color),
-                P_Price = VALUES(P_Price),
-                P_Gender = VALUES(P_Gender)
-        `;
 
-        connection.query(upsertQuery, [productID, productName, productImg, productType, productBrand, productSource, productColor, productPrice, productGender], (err, results) => {
-            if (err) 
-                {
-                    console.error(err);
-                    return res.status(500).send('Failed to save product data');
-                }
-            res.redirect('http://localhost:3040/productmanage');
-        });
-    }
+    
+    // Query code
+    const upsertQuery = `
+        INSERT INTO PRODUCT (P_ID, P_Name, P_Img, P_Type, P_Brand, P_Source, P_Color, P_Price, P_Gender)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE 
+            P_Name = VALUES(P_Name),
+            P_Img = VALUES(P_Img),
+            P_Type = VALUES(P_Type),
+            P_Brand = VALUES(P_Brand),
+            P_Source = VALUES(P_Source),
+            P_Color = VALUES(P_Color),
+            P_Price = VALUES(P_Price),
+            P_Gender = VALUES(P_Gender)`
+    ;
+
+    connection.query(upsertQuery, [productID, productName, productImg, productType, productBrand, productSource, productColor, productPrice, productGender], (err, results) => {
+        if (err) 
+            {
+                console.error(err);
+                return res.status(500).send('Failed to save product data');
+            }
+        res.redirect('http://localhost:3040/productmanage');
+    });
+    
 });
 
 
 
+
+// Testing DELETE PRODUCT 1
+// method: delete
+// URL: http://localhost:3050/deleteproduct/11
+// body: raw JSON 
+
+// Testing DELETE PRODUCT 2
+// method: delete
+// URL: http://localhost:3050/deleteproduct/12
+// body: raw JSON 
 
 // DELETE BY ID(PRODUCT)
 router.delete('/deleteproduct/:id',(req,res) => 
@@ -359,7 +427,11 @@ router.delete('/deleteproduct/:id',(req,res) =>
 
 
 
-
+// Testing SELECT ALL ADMIN
+// method: get
+// URL: http://localhost:3050/admins
+// body: raw JSON 
+// SELECT ALL(PRODUCT)
 
 // SELECT ALL(ADMIN)
 router.get('/admins',(req,res) => 
@@ -377,7 +449,21 @@ router.get('/admins',(req,res) =>
     }
 )
 
+// Testing SELECT ADMIN BY ID 1
+// method: get 
+// URL: http://localhost:3050/admins/1
+// body: raw JSON 
+// { 
+//   "id": 1
+// }
 
+// Testing SELECT ADMIN BY ID 2
+// method: get 
+// URL: http://localhost:3050/admins/2
+// body: raw JSON 
+// { 
+//   "id": 2
+// }
 
 // SELECT BY ID(ADMIN)
 router.get('/admins/:id',(req,res) => 
@@ -398,6 +484,63 @@ router.get('/admins/:id',(req,res) =>
         )
     }
 )
+
+
+// Testing INSERT ADMIN 1
+// method: post
+// URL: http://localhost:3050/updateadmin
+// body: raw JSON 
+// { 
+//      "id": 5,
+//      "username": "ict",
+//      "password": "6688",
+//      "firstname": "Mahidol",
+//      "lastname": "Salaya",
+//      "birthdate": "2000-01-01",
+//      "address": "Salaya, NakornPathom"
+//   }
+
+// Testing INSERT ADMIN 2
+// method: post
+// URL: http://localhost:3050/updateadmin
+// body: raw JSON 
+// { 
+//      "id": 6,
+//      "username": "dst",
+//      "password": "6687",
+//      "firstname": "ITDS242",
+//      "lastname": "Web",
+//      "birthdate": "2000-01-01",
+//      "address": "Salaya, NakornPathom"
+//   }
+
+// Testing UPDATE ADMIN 1
+// method: post
+// URL: http://localhost:3050/updateadmin
+// body: raw JSON 
+// { 
+//      "id": 5,
+//      "username": "ict555",
+//      "password": "6688000",
+//      "firstname": "Salaya",
+//      "lastname": "Mahidol",
+//      "birthdate": "2005-02-02",
+//      "address": "Bangkok"
+//   }
+
+// Testing UPDATE ADMIN 2
+// method: post
+// URL: http://localhost:3050/updateadmin
+// body: raw JSON 
+// { 
+//      "id": 6,
+//      "username": "dst555",
+//      "password": "6687000",
+//      "firstname": "Web",
+//      "lastname": "ITDS242",
+//      "birthdate": "2005-02-02",
+//      "address": "Bangkok"
+//   }
 
 // UPDATE AND INSERT(UPSERT) ADMIN
 router.post('/updateadmin', (req, res) => {
@@ -432,6 +575,15 @@ router.post('/updateadmin', (req, res) => {
 });
 
 
+// Testing DELETE ADMIN 1
+// method: delete
+// URL: http://localhost:3050/deleteadmin/5
+// body: raw JSON 
+
+// Testing DELETE ADMIN 2
+// method: delete
+// URL: http://localhost:3050/deleteadmin/6
+// body: raw JSON 
 
 // DELETE BY ID(ADMIN)
 router.delete('/deleteadmin/:id',(req,res) => 
