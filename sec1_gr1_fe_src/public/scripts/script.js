@@ -11,10 +11,7 @@ fetch('/components/footer.html')
   });
 
 function logout() {
-  // Clear all data from localStorage   
   localStorage.clear();
-
-  // Redirect to login page
   window.location.href = 'http://localhost:3040/login'; // Change '/login' to your login page URL
 }
 
@@ -61,9 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         console.log(data);
-
-        // const gridContainer = document.createElement('div');
-        //   gridContainer.classList.add('grid', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4', 'gap-8', 'mt-8');
 
         data.forEach((item) => {
           const resultBox = document.createElement('div');
@@ -260,11 +254,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Product Manage button
 document.addEventListener('DOMContentLoaded', () => {
-  // Get the query parameters from the URL
+
   const params = new URLSearchParams(window.location.search);
   const productID = params.get('id');
 
-  // If there's a valid train ID, fetch the corresponding train data
   if (productID) {
       fetch(`http://localhost:3050/records/${productID}`)
           .then(response => response.json())
@@ -374,11 +367,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Admin Manage button
 document.addEventListener('DOMContentLoaded', () => {
-  // Get the query parameters from the URL
+
   const params = new URLSearchParams(window.location.search);
   const adminID = params.get('id');
 
-  // If there's a valid train ID, fetch the corresponding train data
   if (adminID) {
       fetch(`http://localhost:3050/admins/${adminID}`)
           .then(response => response.json())
@@ -390,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
               document.getElementById('admin-firstname').value = data.A_FirstName;
               document.getElementById('admin-lastname').value = data.A_LastName;
 
-              // Format birth date for input[type="date"] as yyyy-mm-dd
+              // Format birth date to yyyy-mm-dd
               const birthDate = new Date(data.A_BirthDate);  
               const year = birthDate.getUTCFullYear();  
               const month = String(birthDate.getUTCMonth() + 1).padStart(2, '0');  

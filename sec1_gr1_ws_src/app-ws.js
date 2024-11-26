@@ -53,7 +53,7 @@ router.post('/login', (req, res) => {
     const { username, password } = req.body;
     console.log(req.body);
 
-    // Check if the user exists in the database (using SQL)
+    // Check if the user exists in the database 
     let sql = `SELECT * FROM ADMIN WHERE A_Username = ?`;
     connection.query(sql, [username], (err, result) => {
         if (err) {
@@ -65,12 +65,8 @@ router.post('/login', (req, res) => {
             return res.status(401).send('Invalid username or password');
         }
 
-        // Get the user record from the result
-        const user = result[0];  // Assuming there's only one match
-
-        // Verify the password using bcrypt
+        const user = result[0];
         console.log(password, user.A_Password);
-        
 
         if (err) {
             console.error('Error comparing passwords:', err);
@@ -81,16 +77,13 @@ router.post('/login', (req, res) => {
         }
 
         
-        // Create a JWT token with user info (e.g., username, role)
+        // Create a JWT token
         const token = jwt.sign(
-            { username: user.A_Username, role: user.A_Role }, // Use the correct fields from your database
+            { username: user.A_Username, role: user.A_Role },
             process.env.JWT_SECRET,
-            { expiresIn: '10m' }  // Token expiration time
+            { expiresIn: '10m' }
         );
-
-        // Send the token to the client
         res.json({ token });
-        
     });
 });
 
@@ -100,7 +93,7 @@ router.post('/login', (req, res) => {
 
 
 
-// Test upload/search data to MySQL
+// Search data from MySQL
 router.post('/search', upload.single('image'), (req, res) => {
     const productID = req.body.id;
     const productType = req.body.type;
@@ -113,11 +106,10 @@ router.post('/search', upload.single('image'), (req, res) => {
 
     console.log(`Request at ${req.originalUrl}`);
 
-    // Start with a base SQL query
+    // Set query code
     let sql = `SELECT P_ID,P_Name,P_Type,P_Brand,P_Source,P_Color,P_Price,P_Gender FROM PRODUCT WHERE 1=1`;
     const params = [];
 
-    // Dynamically add conditions based on provided values
     if (productID) {
         sql += ` AND P_ID = ?`;
         params.push(productID);
@@ -154,7 +146,7 @@ router.post('/search', upload.single('image'), (req, res) => {
         
     }
 
-    // Execute the query
+    // Execute 
     connection.query(sql, params, (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -162,7 +154,7 @@ router.post('/search', upload.single('image'), (req, res) => {
 });
 
 
-// Test download from MySQL
+// download IMG from MySQL
 router.get('/image/:id', (req, res) => {
     const imageId = req.params.id;
     console.log(imageId);
@@ -180,7 +172,7 @@ router.get('/image/:id', (req, res) => {
         const { P_Name, P_Img } = results[0];
         console.log("Image record:", { P_Name, P_Img });
         
-        // Find type of image/Detect the MIME type based on the file extension
+        // Find type of image in the MIME
         const fileExtension = path.extname(P_Name).toLowerCase();
         let mimeType;
 
@@ -203,14 +195,14 @@ router.get('/image/:id', (req, res) => {
         console.log('File extension:', fileExtension);
         console.log('Mime type:', mimeType);
 
-        // Set MIME type and send image data
+        // Set MIME type 
         res.set('Content-Type', mimeType);
         res.send(P_Img);  // Send the image data
     });
 });
 
 
-// Detail
+// Details
 router.get("/details/:id", (req, res) => {
     const query = "SELECT * FROM PRODUCT WHERE P_ID = ?";
     const { id } = req.params;
@@ -284,7 +276,7 @@ router.post('/updateproduct', upload.single('img'), (req, res) => {
     const productPrice = req.body.price;
     const productSource = req.body.source;
 
-    // Use the new image if uploaded, otherwise use the current image from the database
+    // Use the new image if uploaded or use null
     let productImg = req.file ? req.file.buffer : null;
 
     if (!productImg) 
@@ -295,7 +287,7 @@ router.post('/updateproduct', upload.single('img'), (req, res) => {
             if (err) return res.status(500).send('Database error');
             if (results.length > 0) 
                 {
-                    productImg = results[0].P_Img; // Retain the old image
+                    productImg = results[0].P_Img; 
                 } 
             else 
                 {
@@ -315,6 +307,7 @@ router.post('/updateproduct', upload.single('img'), (req, res) => {
 
     function updateProduct() 
     {
+        // Query code
         const upsertQuery = `
             INSERT INTO PRODUCT (P_ID, P_Name, P_Img, P_Type, P_Brand, P_Source, P_Color, P_Price, P_Gender)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
